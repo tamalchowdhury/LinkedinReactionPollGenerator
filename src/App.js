@@ -262,7 +262,7 @@ function App() {
                   <img src={insightful} alt="insightful Button" />
                 </label>
               </div>
-              <label htmlFor="label_nsightful">Label for Insightful</label>
+              <label htmlFor="label_insightful">Label for Insightful</label>
               <input
                 type="text"
                 name="label_insightful"
