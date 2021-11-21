@@ -1,4 +1,7 @@
 import './App.css'
+import domtoimage from 'dom-to-image'
+import { saveAs } from 'file-saver'
+
 import { useState } from 'react'
 import like from './img/like.png'
 import celebrate from './img/celebrate.png'
@@ -6,65 +9,114 @@ import love from './img/love.png'
 import insightful from './img/insightful.png'
 import curious from './img/curious.png'
 
+function Preview() {
+  return <h1>Hello World</h1>
+}
+
 function App() {
   const [pollTitle, setPollTitle] = useState('Who is your favorite CEO?')
+  const [showLike, setShowLike] = useState({ isShowing: false, text: 'Like' })
+  const [showCelebrate, setShowCelebrate] = useState({
+    isShowing: false,
+    text: 'Celebrate',
+  })
+  const [showLove, setShowLove] = useState({ isShowing: false, text: 'Love' })
+  const [showInsightful, setShowInsightful] = useState({
+    isShowing: false,
+    text: 'Insightful',
+  })
+  const [showCurious, setShowCurious] = useState({
+    isShowing: false,
+    text: 'Curious',
+  })
+
+  const options = { width: 540 }
+
+  function downloadImage() {
+    const nodeElement = document.querySelector('.preview')
+    domtoimage.toBlob(nodeElement, options).then(function (blob) {
+      window.saveAs(blob, `poll-${pollTitle}`)
+    })
+  }
+
+  function generateImage() {
+    const nodeElement = document.querySelector('.preview')
+    domtoimage
+      .toPng(<Preview />, options)
+      .then(function (dataUrl) {
+        var img = new Image()
+        img.src = dataUrl
+        document.body.appendChild(img)
+      })
+      .catch(function (error) {
+        console.error('oops, something went wrong!', error)
+      })
+  }
 
   return (
     <>
-      <header class="header">
-        <div class="wrapper">
+      <header className="header">
+        <div className="wrapper">
           <h1>
             <a href="/">LinkedIn Reaction Poll Generator </a>
             <span id="beta">(Beta)</span>
           </h1>
         </div>
       </header>
-      <div class="container">
-        <div class="demo">
-          <div class="demo__wrap">
-            <div class="demo__linkedin">
-              <div class="demo__linkedin__image">
+      <div className="container">
+        <div className="demo">
+          <div className="demo__wrap">
+            <div className="demo__linkedin">
+              <div className="demo__linkedin__image">
                 <img src="./img/tamal_web.jfif" alt="Tamal Web" />
               </div>
-              <div class="demo__linkedin__author">
-                <div class="demo__linkedin__author__name">Tamal Web</div>
-                <div class="demo__linkedin__author__byline">
+              <div className="demo__linkedin__author">
+                <div className="demo__linkedin__author__name">Tamal Web</div>
+                <div className="demo__linkedin__author__byline">
                   Frontend Engineer
                 </div>
               </div>
             </div>
-            <div class="preview">
-              <div>
-                <div class="preview__title">{pollTitle}</div>
-                <div class="preview__icons">
-                  <div class="preview__icon">
-                    <img src={like} alt="insightful Button" />
-                    <p>Java</p>
+            <div className="preview">
+              <div className="preview__title">{pollTitle}</div>
+              <div className="preview__icons">
+                {showLike.isShowing && (
+                  <div className="preview__icon">
+                    <img src={like} alt="like Button" />
+                    <p>{showLike.text}</p>
                   </div>
-                  <div class="preview__icon">
-                    <img src={curious} alt="curious Button" />
-                    <p>Python</p>
+                )}
+                {showCelebrate.isShowing && (
+                  <div className="preview__icon">
+                    <img src={celebrate} alt="curious Button" />
+                    <p>{showCelebrate.text}</p>
                   </div>
-                  <div class="preview__icon">
+                )}
+                {showLove.isShowing && (
+                  <div className="preview__icon">
                     <img src={love} alt="love Button" />
-                    <p>JavaScript</p>
+                    <p>{showLove.text}</p>
                   </div>
-                  <div class="preview__icon">
-                    <img src="./img/insightful.png" alt="curious Button" />
-                    <p>Kotlin</p>
+                )}
+                {showInsightful.isShowing && (
+                  <div className="preview__icon">
+                    <img src={insightful} alt="insightful Button" />
+                    <p>{showInsightful.text}</p>
                   </div>
-                  <div class="preview__icon">
-                    <img src="./img/celebrate.png" alt="curious Button" />
-                    <p>Kotlin</p>
+                )}
+                {showCurious.isShowing && (
+                  <div className="preview__icon">
+                    <img src={curious} alt="curious Button" />
+                    <p>{showCurious.text}</p>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </div>
         </div>
-        <form class="poll">
-          <div class="title">
-            <label for="poll_title" class="step_text">
+        <form className="poll">
+          <div className="title">
+            <label htmlFor="poll_title" className="step_text">
               1. Poll Title:
             </label>
             <br />
@@ -75,82 +127,165 @@ function App() {
               onChange={(e) => setPollTitle(e.target.value)}
             />
           </div>
-          <p class="step_text">2. Select icons & text to appear</p>
-          <div class="reaction">
-            <div class="reaction__icon">
-              <div class="reaction__icon__wrap">
-                <input type="checkbox" name="like" id="like" />
-                <label for="like">
+          <p className="step_text">2. Select icons & text to appear</p>
+          <div className="reaction">
+            <div className="reaction__icon">
+              <div className="reaction__icon__wrap">
+                <input
+                  type="checkbox"
+                  name="like"
+                  id="like"
+                  onChange={(e) =>
+                    setShowLike({
+                      isShowing: e.target.checked,
+                      text: showLike.text,
+                    })
+                  }
+                />
+                <label htmlFor="like">
                   <img src={like} alt="Like Button" />
                 </label>
               </div>
+              <label htmlFor="label_like">Label for Like</label>
               <input
                 type="text"
                 name="label_like"
                 id="label_like"
-                placeholder="Label for like"
+                onChange={(e) =>
+                  setShowLike({
+                    isShowing: showLike.isShowing,
+                    text: e.target.value,
+                  })
+                }
               />
             </div>
-            <div class="reaction__icon">
-              <div class="reaction__icon__wrap">
-                <input type="checkbox" name="celebrate" id="celebrate" />
-                <label for="celebrate">
+            <div className="reaction__icon">
+              <div className="reaction__icon__wrap">
+                <input
+                  type="checkbox"
+                  name="celebrate"
+                  id="celebrate"
+                  onChange={(e) =>
+                    setShowCelebrate({
+                      isShowing: e.target.checked,
+                      text: showCelebrate.text,
+                    })
+                  }
+                />
+                <label htmlFor="celebrate">
                   <img src={celebrate} alt="celebrate Button" />
                 </label>
               </div>
+              <label htmlFor="label_celebrate">Label for Celebrate</label>
               <input
                 type="text"
                 name="label_celebrate"
                 id="label_celebrate"
-                placeholder="Label for celebrate"
+                onChange={(e) =>
+                  setShowCelebrate({
+                    isShowing: showCelebrate.isShowing,
+                    text: e.target.value,
+                  })
+                }
               />
             </div>
-            <div class="reaction__icon">
-              <div class="reaction__icon__wrap">
-                <input type="checkbox" name="love" id="love" />
-                <label for="love">
+            <div className="reaction__icon">
+              <div className="reaction__icon__wrap">
+                <input
+                  type="checkbox"
+                  name="love"
+                  id="love"
+                  onChange={(e) =>
+                    setShowLove({
+                      isShowing: e.target.checked,
+                      text: showLove.text,
+                    })
+                  }
+                />
+                <label htmlFor="love">
                   <img src={love} alt="love Button" />
                 </label>
               </div>
+              <label htmlFor="label_love">Label for Love</label>
               <input
                 type="text"
                 name="label_love"
                 id="label_love"
-                placeholder="Label for love"
+                onChange={(e) =>
+                  setShowLove({
+                    isShowing: showLove.isShowing,
+                    text: e.target.value,
+                  })
+                }
               />
             </div>
-            <div class="reaction__icon">
-              <div class="reaction__icon__wrap">
-                <input type="checkbox" name="insightful" id="insightful" />
-                <label for="insightful">
+            <div className="reaction__icon">
+              <div className="reaction__icon__wrap">
+                <input
+                  type="checkbox"
+                  name="insightful"
+                  id="insightful"
+                  onChange={(e) =>
+                    setShowInsightful({
+                      isShowing: e.target.checked,
+                      text: showInsightful.text,
+                    })
+                  }
+                />
+                <label htmlFor="insightful">
                   <img src={insightful} alt="insightful Button" />
                 </label>
               </div>
+              <label htmlFor="label_nsightful">Label for Insightful</label>
               <input
                 type="text"
                 name="label_insightful"
                 id="label_insightful"
-                placeholder="Label for insightful"
+                onChange={(e) =>
+                  setShowInsightful({
+                    isShowing: showInsightful.isShowing,
+                    text: e.target.value,
+                  })
+                }
               />
             </div>
-            <div class="reaction__icon">
-              <div class="reaction__icon__wrap">
-                <input type="checkbox" name="curious" id="curious" />
-                <label for="curious">
+            <div className="reaction__icon">
+              <div className="reaction__icon__wrap">
+                <input
+                  type="checkbox"
+                  name="curious"
+                  id="curious"
+                  onChange={(e) =>
+                    setShowCurious({
+                      isShowing: e.target.checked,
+                      text: showCurious.text,
+                    })
+                  }
+                />
+                <label htmlFor="curious">
                   <img src={curious} alt="curious Button" />
                 </label>
               </div>
+              <label htmlFor="label_curious">Label for Curious</label>
               <input
                 type="text"
                 name="label_curious"
                 id="label_curious"
-                placeholder="Label for curious"
+                onChange={(e) =>
+                  setShowCurious({
+                    isShowing: showCurious.isShowing,
+                    text: e.target.value,
+                  })
+                }
               />
             </div>
           </div>
         </form>
-        <p class="step_text">
-          3. Preview & Download <button class="download">Download</button>
+        <p className="step_text">
+          3. Preview & Download{' '}
+          <button className="download" onClick={downloadImage}>
+            Download
+          </button>
         </p>
         <h3>Tips for better engagements:</h3>
         <ul>
@@ -162,8 +297,8 @@ function App() {
           </li>
         </ul>
 
-        <footer class="footer">
-          <p class="text_center">
+        <footer className="footer">
+          <p className="text_center">
             &copy; 2021 Put Together by Tamal Web, Alex Chiou, Rahul Pandey,
             Luke Hovee & Tech Career Growth Community
           </p>

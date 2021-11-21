@@ -156,11 +156,10 @@ img {
 
 .preview {
   width: 540px;
+  min-height: 450px;
   padding: 2rem;
   background: #fff;
   margin: 0 auto;
-  /* border: 1px solid #ddd; */
-  display: flex;
 }
 
 .preview__title {
@@ -172,10 +171,16 @@ img {
 
 .preview__icons {
   display: flex;
+  justify-content: space-around;
+  margin-top: 2rem;
 }
 
 .preview__icon {
   text-align: center;
+}
+
+.preview__icon img {
+  max-height: 200px;
 }
 
 .preview__icon p {
