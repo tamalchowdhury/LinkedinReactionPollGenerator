@@ -1,3 +1,16 @@
+/*
+Copyright 2021 @tamalweb Tamal Anwar Chowdhury
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    https://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
 *,
 *::before,
 *::after {
@@ -66,9 +79,9 @@ ol {
 .container {
   background: #fff;
   width: 800px;
+  max-width: 100%;
   padding: 1rem;
   margin: 0 auto;
-  max-width: 100%;
   display: grid;
   gap: 1rem;
 }
@@ -197,7 +210,7 @@ img {
   width: max-content;
   padding: 7px 20px;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 0.8rem;
   background: #ffeb3b;
   border: 1px solid;
   cursor: pointer;
@@ -207,4 +220,7 @@ img {
 
 #download:hover {
   background: #fbc02d;
+}
+
+@media (max-width: 375px) {
 }

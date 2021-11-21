@@ -1,70 +1,52 @@
-# Getting Started with Create React App
+# LinkedIn Reaction Poll Generator(Beta)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Reactions increase the reach of a post on LinkedIn similar to what happens on every other social media platform. Because of this, something I call "reaction polls" have become really popular as a growth hack. Instead of running a regular LinkedIn poll, which is frankly pretty jank and constrained to 4 options, you can have users react to your post to vote on the option they want, creating a much richer experience that also nets you the poster a bunch of free engagement. If you don't know what I'm talking about, here's an example of one of these reaction polls:
 
-## Available Scripts
+![LinkedIn Reaction Image example](https://github.com/Gear61/Software-Project-Ideas/raw/main/media/linkedin_reaction_image_example.png)
 
-In the project directory, you can run:
+This project is an implementation to the [idea here](https://github.com/Gear61/Software-Project-Ideas/blob/main/LinkedIn%20Reaction%20Poll%20Generator.md) by Alex Chiou.
 
-### `yarn start`
+![LinkedIn Reaction Poll Generator (Beta)](./media/screenshot.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Using the app will output an image that is 540px wide for Linkedin feed:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+![Generated Image](./media/output.png)
 
-### `yarn test`
+## Running it Locally:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Clone this project to your computer and cd into the project. Run `yarn install` (you can also do `npm install`, but yarn seems to download everything quickly, since we already have a lock file).
 
-### `yarn build`
+Run this project by typing `yarn start` and visiting `localhost:3000` on your computer.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Edit the `App.js` file, it's a single file with all the HTML and JS for the time being.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Edit the `App.css` file to style the app.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## MVP Requirements (implemented)
 
-### `yarn eject`
+- Show an initially blank image with the 5 LinkedIn reactions. This will be the "canvas" that lets users know what their reaction poll currently looks like.
+- User can type in what question they want to poll to ask. The "canvas" should update in real-time.
+- User can type in the text they want to show up for each of the reactions. The "canvas" should update in real-time.
+- User can click a button and download the filled in template image when they are done.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## How it is done?
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Using `<canvas>` API it's possible to draw text over images like we see meme generators. But implementing the raw API is cumbersome. Fortunately there a are bunch of open source tools that let us make it easily. I used the [Dom To Image](https://github.com/tsayen/dom-to-image) package to handle the image generation. I was surprised it created the image without any visible inconsistancies.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+I created a preview or demo area where we will put all the text and icons. When we click **download** domtoimage will take that entire element by the class and offer to save. The save function is achieved using another package called [File Saver](https://github.com/eligrey/FileSaver.js/)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+The main interactivity is done using ReactJS with local state.
 
-## Learn More
+## Next Steps
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Need to make this app usable on the mobile. Right now it's not very friendly, because it's best fit as a desktop app.
+- Implement accessibility.
+- Browser testing
+- Need to fix bugs after user testing.
+- Want to implement high-resolution image outputs. At least 800-1200px.
+- A reset button to clear all the text.
+- Refactor the code.
+- Save the last image data into the user's browser.
+- Implement image loading skeleton for layout shifts
+- What happenes when we add a long title and long option names? Currently when we enter a long title, it will not add `.png` at the end of the file when saving the file. So we might wanna trim the file name when saving.
+- Other extensions mentioned [here](https://github.com/Gear61/Software-Project-Ideas/blob/main/LinkedIn%20Reaction%20Poll%20Generator.md#possible-extensions)

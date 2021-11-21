@@ -1,3 +1,16 @@
+/*
+Copyright 2021 @tamalweb Tamal Anwar Chowdhury
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    https://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
 import './App.css'
 import domtoimage from 'dom-to-image'
 import { saveAs } from 'file-saver'
@@ -14,6 +27,7 @@ import lori from './img/lori.jpg'
 import kevin from './img/kevin.jpg'
 import barbara from './img/barbara.jpg'
 
+// These are the demo people we see as Linkedin users
 const profiles = [
   { img: mark, name: 'Mark Cuban', byline: 'American entrepreneur' },
   { img: lori, name: 'Lori Greiner', byline: 'TV personality' },
@@ -25,6 +39,7 @@ const profiles = [
   },
 ]
 
+// This is used to pick the person for linkedin avatar
 const random = Math.floor(Math.random() * profiles.length)
 
 function App() {
@@ -50,9 +65,8 @@ function App() {
     text: 'Curious',
   })
 
-  const options = { width: 540 }
-
   function downloadImage() {
+    const options = { width: 540 }
     const nodeElement = document.querySelector('.preview')
     domtoimage.toBlob(nodeElement, options).then(function (blob) {
       window.saveAs(blob, `poll-${pollTitle}`)
