@@ -9,18 +9,38 @@ import love from './img/love.png'
 import insightful from './img/insightful.png'
 import curious from './img/curious.png'
 
-function Preview() {
-  return <h1>Hello World</h1>
-}
+import mark from './img/mark.jpg'
+import lori from './img/lori.jpg'
+import kevin from './img/kevin.jpg'
+import barbara from './img/barbara.jpg'
+
+const profiles = [
+  { img: mark, name: 'Mark Cuban', byline: 'American entrepreneur' },
+  { img: lori, name: 'Lori Greiner', byline: 'TV personality' },
+  { img: kevin, name: "Kevin O'Leary", byline: 'Canadian businessman' },
+  {
+    img: barbara,
+    name: 'Barbara Corcoran',
+    byline: 'American businesswoman',
+  },
+]
+
+const random = Math.floor(Math.random() * profiles.length)
 
 function App() {
   const [pollTitle, setPollTitle] = useState('Who is your favorite CEO?')
-  const [showLike, setShowLike] = useState({ isShowing: false, text: 'Like' })
-  const [showCelebrate, setShowCelebrate] = useState({
-    isShowing: false,
-    text: 'Celebrate',
+  const [showLike, setShowLike] = useState({
+    isShowing: true,
+    text: 'Mark Zuckerberg',
   })
-  const [showLove, setShowLove] = useState({ isShowing: false, text: 'Love' })
+  const [showCelebrate, setShowCelebrate] = useState({
+    isShowing: true,
+    text: 'Sundar Pichai',
+  })
+  const [showLove, setShowLove] = useState({
+    isShowing: true,
+    text: 'Elon Musk',
+  })
   const [showInsightful, setShowInsightful] = useState({
     isShowing: false,
     text: 'Insightful',
@@ -39,18 +59,12 @@ function App() {
     })
   }
 
-  function generateImage() {
-    const nodeElement = document.querySelector('.preview')
-    domtoimage
-      .toPng(<Preview />, options)
-      .then(function (dataUrl) {
-        var img = new Image()
-        img.src = dataUrl
-        document.body.appendChild(img)
-      })
-      .catch(function (error) {
-        console.error('oops, something went wrong!', error)
-      })
+  function DownloadButton() {
+    return (
+      <button id="download" onClick={downloadImage}>
+        Download Image <i class="fas fa-download"></i>
+      </button>
+    )
   }
 
   return (
@@ -64,16 +78,24 @@ function App() {
         </div>
       </header>
       <div className="container">
+        <DownloadButton />
         <div className="demo">
           <div className="demo__wrap">
             <div className="demo__linkedin">
               <div className="demo__linkedin__image">
-                <img src="./img/tamal_web.jfif" alt="Tamal Web" />
+                <img
+                  src={profiles[random].img}
+                  alt={profiles[random].name}
+                  width="48"
+                  height="48"
+                />
               </div>
               <div className="demo__linkedin__author">
-                <div className="demo__linkedin__author__name">Tamal Web</div>
+                <div className="demo__linkedin__author__name">
+                  {profiles[random].name}
+                </div>
                 <div className="demo__linkedin__author__byline">
-                  Frontend Engineer
+                  {profiles[random].byline}
                 </div>
               </div>
             </div>
@@ -133,6 +155,7 @@ function App() {
               <div className="reaction__icon__wrap">
                 <input
                   type="checkbox"
+                  checked={showLike.isShowing}
                   name="like"
                   id="like"
                   onChange={(e) =>
@@ -163,6 +186,7 @@ function App() {
               <div className="reaction__icon__wrap">
                 <input
                   type="checkbox"
+                  checked={showCelebrate.isShowing}
                   name="celebrate"
                   id="celebrate"
                   onChange={(e) =>
@@ -193,6 +217,7 @@ function App() {
               <div className="reaction__icon__wrap">
                 <input
                   type="checkbox"
+                  checked={showLove.isShowing}
                   name="love"
                   id="love"
                   onChange={(e) =>
@@ -223,6 +248,7 @@ function App() {
               <div className="reaction__icon__wrap">
                 <input
                   type="checkbox"
+                  checked={showInsightful.isShowing}
                   name="insightful"
                   id="insightful"
                   onChange={(e) =>
@@ -253,6 +279,7 @@ function App() {
               <div className="reaction__icon__wrap">
                 <input
                   type="checkbox"
+                  checked={showCurious.isShowing}
                   name="curious"
                   id="curious"
                   onChange={(e) =>
@@ -281,12 +308,8 @@ function App() {
             </div>
           </div>
         </form>
-        <p className="step_text">
-          3. Preview & Download{' '}
-          <button className="download" onClick={downloadImage}>
-            Download
-          </button>
-        </p>
+        <p className="step_text">3. Preview & Download </p>
+        <DownloadButton />
         <h3>Tips for better engagements:</h3>
         <ul>
           <li>Use more than 2 poll options, 3 is better</li>

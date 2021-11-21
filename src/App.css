@@ -70,7 +70,7 @@ ol {
   margin: 0 auto;
   max-width: 100%;
   display: grid;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .poll {
@@ -190,4 +190,21 @@ img {
 
 .footer {
   font-size: 0.8rem;
+}
+
+#download {
+  display: inline-block;
+  width: max-content;
+  padding: 7px 20px;
+  font-weight: bold;
+  font-size: 1rem;
+  background: #ffeb3b;
+  border: 1px solid;
+  cursor: pointer;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+
+#download:hover {
+  background: #fbc02d;
 }
