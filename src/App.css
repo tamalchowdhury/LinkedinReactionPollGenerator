@@ -167,6 +167,7 @@ img {
   text-align: center;
   font-size: 2rem;
   font-weight: bold;
+  min-height: 85px;
 }
 
 .preview__icons {

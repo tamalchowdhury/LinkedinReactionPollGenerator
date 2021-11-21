@@ -1,4 +1,3 @@
-import logo from './logo.svg'
 import './App.css'
 import { useState } from 'react'
 import like from './img/like.png'
@@ -8,6 +7,8 @@ import insightful from './img/insightful.png'
 import curious from './img/curious.png'
 
 function App() {
+  const [pollTitle, setPollTitle] = useState('Who is your favorite CEO?')
+
   return (
     <>
       <header class="header">
@@ -34,9 +35,7 @@ function App() {
             </div>
             <div class="preview">
               <div>
-                <div class="preview__title">
-                  What is Your Favorite Programming Language?
-                </div>
+                <div class="preview__title">{pollTitle}</div>
                 <div class="preview__icons">
                   <div class="preview__icon">
                     <img src={like} alt="insightful Button" />
@@ -66,16 +65,17 @@ function App() {
         <form class="poll">
           <div class="title">
             <label for="poll_title" class="step_text">
-              1. Enter a Poll Title:
+              1. Poll Title:
             </label>
+            <br />
             <input
               type="text"
               name="poll_title"
               id="poll_title"
-              placeholder="Who is your favorite CEO?"
+              onChange={(e) => setPollTitle(e.target.value)}
             />
           </div>
-          <p class="step_text">2. Pick the icons & enter text</p>
+          <p class="step_text">2. Select icons & text to appear</p>
           <div class="reaction">
             <div class="reaction__icon">
               <div class="reaction__icon__wrap">
