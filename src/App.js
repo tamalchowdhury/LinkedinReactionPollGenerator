@@ -14,7 +14,6 @@ limitations under the License.
 import './App.css'
 import domtoimage from 'dom-to-image'
 import { saveAs } from 'file-saver'
-import ReactGA from 'react-ga'
 
 import { useEffect, useState } from 'react'
 import like from './img/like.png'
@@ -66,21 +65,11 @@ function App() {
     text: 'Curious',
   })
 
-  useEffect(() => {
-    ReactGA.initialize('G-M95DK5FP10')
-    ReactGA.pageview(window.location.pathname + window.location.search)
-  }, [])
-
   function downloadImage() {
     const options = { width: 540 }
     const nodeElement = document.querySelector('.preview')
     domtoimage.toBlob(nodeElement, options).then(function (blob) {
       window.saveAs(blob, `poll-${pollTitle}`)
-    })
-    // Report the download event
-    ReactGA.event({
-      category: 'User',
-      action: 'Download image',
     })
   }
 
