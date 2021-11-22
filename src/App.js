@@ -14,6 +14,7 @@ limitations under the License.
 import './App.css'
 import domtoimage from 'dom-to-image'
 import { saveAs } from 'file-saver'
+import GitHubButton from 'react-github-btn'
 
 import { useEffect, useState } from 'react'
 import like from './img/like.png'
@@ -334,10 +335,21 @@ function App() {
           </li>
         </ul>
 
-        <footer className="footer">
-          <p className="text_center">
-            &copy; 2021 Put Together by Tamal Web, Alex Chiou, Rahul Pandey,
-            Luke Hovee & Tech Career Growth Community
+        <footer className="footer text_center">
+          <p>&copy; 2021 Put Together by Tamal Web</p>
+          <p>
+            Thanks to Alex Chiou, Rahul Pandey, Luke Hovee & Tech Career Growth
+            Community
+          </p>
+          <p>
+            <GitHubButton
+              href="https://github.com/tamalweb/LinkedinReactionPollGenerator"
+              data-color-scheme="no-preference: light; light: light; dark: dark;"
+              data-show-count="true"
+              aria-label="Star this repo on GitHub"
+            >
+              Star
+            </GitHubButton>
           </p>
         </footer>
       </div>

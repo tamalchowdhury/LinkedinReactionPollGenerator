@@ -40,7 +40,8 @@ The main interactivity is done using ReactJS with local state.
 ## Next Steps
 
 - Add google analytics for page views and custom events for image download button clicks.
-- Add github star button
+- Add the 6th remaining icon, Support.
+- Add github star button.
 - Add option for image uploads for each votes.
 - Variable text size for legibility.
 - Better layout so we can see the text while editing.
