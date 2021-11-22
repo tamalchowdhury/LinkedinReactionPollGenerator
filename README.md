@@ -39,9 +39,13 @@ The main interactivity is done using ReactJS with local state.
 
 ## Next Steps
 
+- Add google analytics for page views and custom events for image download button clicks.
+- Add option for image uploads for each votes.
+- Variable text size for legibility.
+- Better layout so we can see the text while editing.
 - Need to make this app usable on the mobile. Right now it's not very friendly, because it's best fit as a desktop app.
 - Implement accessibility.
-- Browser testing
+- Browser testing.
 - Need to fix bugs after user testing.
 - Want to implement high-resolution image outputs. At least 800-1200px.
 - A reset button to clear all the text.
