@@ -23,26 +23,6 @@ import love from './img/love.png'
 import insightful from './img/insightful.png'
 import curious from './img/curious.png'
 
-import mark from './img/mark.jpg'
-import lori from './img/lori.jpg'
-import kevin from './img/kevin.jpg'
-import barbara from './img/barbara.jpg'
-
-// These are the demo people we see as Linkedin users
-const profiles = [
-  { img: mark, name: 'Mark Cuban', byline: 'American entrepreneur' },
-  { img: lori, name: 'Lori Greiner', byline: 'TV personality' },
-  { img: kevin, name: "Kevin O'Leary", byline: 'Canadian businessman' },
-  {
-    img: barbara,
-    name: 'Barbara Corcoran',
-    byline: 'American businesswoman',
-  },
-]
-
-// This is used to pick the person for linkedin avatar
-const random = Math.floor(Math.random() * profiles.length)
-
 function App() {
   const [pollTitle, setPollTitle] = useState('Who is your favorite CEO?')
   const [showLike, setShowLike] = useState({
@@ -74,14 +54,6 @@ function App() {
     })
   }
 
-  function DownloadButton() {
-    return (
-      <button id="download" onClick={downloadImage}>
-        Download Image <i class="fas fa-download"></i>
-      </button>
-    )
-  }
-
   return (
     <>
       <header className="header">
@@ -90,71 +62,14 @@ function App() {
             <a href="/">LinkedIn Reaction Poll Generator </a>
             <span id="beta">(Beta)</span>
           </h1>
+          <p className="tagline">Get more engagements with reaction polls</p>
         </div>
       </header>
       <div className="container">
-        <DownloadButton />
-        <div className="demo">
-          <div className="demo__wrap">
-            <div className="demo__linkedin">
-              <div className="demo__linkedin__image">
-                <img
-                  src={profiles[random].img}
-                  alt={profiles[random].name}
-                  width="48"
-                  height="48"
-                />
-              </div>
-              <div className="demo__linkedin__author">
-                <div className="demo__linkedin__author__name">
-                  {profiles[random].name}
-                </div>
-                <div className="demo__linkedin__author__byline">
-                  {profiles[random].byline}
-                </div>
-              </div>
-            </div>
-            <div className="preview">
-              <div className="preview__title">{pollTitle}</div>
-              <div className="preview__icons">
-                {showLike.isShowing && (
-                  <div className="preview__icon">
-                    <img src={like} alt="like Button" />
-                    <p>{showLike.text}</p>
-                  </div>
-                )}
-                {showCelebrate.isShowing && (
-                  <div className="preview__icon">
-                    <img src={celebrate} alt="curious Button" />
-                    <p>{showCelebrate.text}</p>
-                  </div>
-                )}
-                {showLove.isShowing && (
-                  <div className="preview__icon">
-                    <img src={love} alt="love Button" />
-                    <p>{showLove.text}</p>
-                  </div>
-                )}
-                {showInsightful.isShowing && (
-                  <div className="preview__icon">
-                    <img src={insightful} alt="insightful Button" />
-                    <p>{showInsightful.text}</p>
-                  </div>
-                )}
-                {showCurious.isShowing && (
-                  <div className="preview__icon">
-                    <img src={curious} alt="curious Button" />
-                    <p>{showCurious.text}</p>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
         <form className="poll">
           <div className="title">
             <label htmlFor="poll_title" className="step_text">
-              1. Poll Title:
+              Poll Title:
             </label>
             <br />
             <input
@@ -164,7 +79,8 @@ function App() {
               onChange={(e) => setPollTitle(e.target.value)}
             />
           </div>
-          <p className="step_text">2. Select icons & text to appear</p>
+          <Preview />
+          <p className="step_text">Select icons and text for poll options:</p>
           <div className="reaction">
             <div className="reaction__icon">
               <div className="reaction__icon__wrap">
@@ -323,7 +239,7 @@ function App() {
             </div>
           </div>
         </form>
-        <p className="step_text">3. Preview & Download </p>
+        <p className="step_text">Download The Picture:</p>
         <DownloadButton />
         <h3>Tips for better engagements:</h3>
         <ul>
@@ -336,12 +252,52 @@ function App() {
         </ul>
 
         <footer className="footer text_center">
-          <p>&copy; 2021 Put Together by Tamal Web</p>
           <p>
-            Thanks to Alex Chiou, Rahul Pandey, Luke Hovee & Tech Career Growth
-            Community
+            &copy; 2021 Put Together by{' '}
+            <a
+              href="https://www.linkedin.com/in/tamalweb/"
+              rel="noreferrer"
+              target="_blank"
+            >
+              Tamal Web
+            </a>
           </p>
           <p>
+            Thanks to{' '}
+            <a
+              href="https://www.linkedin.com/in/alexander-chiou/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Alex Chiou
+            </a>
+            ,{' '}
+            <a
+              href="https://www.linkedin.com/in/rpandey1234/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Rahul Pandey
+            </a>
+            ,{' '}
+            <a
+              href="https://www.linkedin.com/in/luke-hovee-2433b7b4/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Luke Hovee
+            </a>{' '}
+            &{' '}
+            <a
+              href="https://www.linkedin.com/company/techcareergrowth/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Tech Career Growth Community
+            </a>
+          </p>
+          <p>
+            Star this repo on Github!{' '}
             <GitHubButton
               href="https://github.com/tamalweb/LinkedinReactionPollGenerator"
               data-color-scheme="no-preference: light; light: light; dark: dark;"
@@ -355,5 +311,59 @@ function App() {
       </div>
     </>
   )
+
+  // Download Button
+  function DownloadButton() {
+    return (
+      <button id="download" onClick={downloadImage}>
+        Download Image <i class="fas fa-download"></i>
+      </button>
+    )
+  }
+
+  // Preview Div
+  function Preview() {
+    return (
+      <div className="demo">
+        <div className="demo__wrap">
+          <div className="preview">
+            <div className="preview__title">{pollTitle}</div>
+            <div className="preview__icons">
+              {showLike.isShowing && (
+                <div className="preview__icon">
+                  <img src={like} alt="like Button" />
+                  <p>{showLike.text}</p>
+                </div>
+              )}
+              {showCelebrate.isShowing && (
+                <div className="preview__icon">
+                  <img src={celebrate} alt="curious Button" />
+                  <p>{showCelebrate.text}</p>
+                </div>
+              )}
+              {showLove.isShowing && (
+                <div className="preview__icon">
+                  <img src={love} alt="love Button" />
+                  <p>{showLove.text}</p>
+                </div>
+              )}
+              {showInsightful.isShowing && (
+                <div className="preview__icon">
+                  <img src={insightful} alt="insightful Button" />
+                  <p>{showInsightful.text}</p>
+                </div>
+              )}
+              {showCurious.isShowing && (
+                <div className="preview__icon">
+                  <img src={curious} alt="curious Button" />
+                  <p>{showCurious.text}</p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
 }
 export default App

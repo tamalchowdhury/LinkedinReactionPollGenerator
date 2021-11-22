@@ -11,6 +11,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+:root {
+  --theme-color: #2867b2;
+}
+
 *,
 *::before,
 *::after {
@@ -30,6 +34,10 @@ body {
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+a {
+  color: var(--theme-color);
+}
+
 ul,
 ol {
   padding-inline-start: 2rem;
@@ -46,7 +54,7 @@ ol {
 }
 
 .header {
-  background: #2867b2;
+  background: var(--theme-color);
   color: #fff;
   padding: 1rem;
 }
@@ -76,6 +84,10 @@ ol {
   gap: 0.25rem;
 }
 
+.tagline {
+  font-size: 0.8rem;
+}
+
 .container {
   background: #fff;
   width: 800px;
@@ -88,7 +100,7 @@ ol {
 
 .poll {
   display: grid;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 #poll_title {
@@ -134,16 +146,12 @@ img {
 
 .demo {
   background: #f5f5f5;
-  padding-top: 1rem;
 }
 
 .demo__wrap {
   background: #fff;
   width: 542px;
   margin: 0 auto;
-  border: 1px solid #ddd;
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
 }
 
 .demo__linkedin {
@@ -202,7 +210,13 @@ img {
 }
 
 .footer {
+  display: grid;
+  gap: 1em;
   font-size: 0.8rem;
+}
+
+.footer p {
+  justify-content: center;
 }
 
 #download {

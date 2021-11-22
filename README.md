@@ -55,4 +55,5 @@ The main interactivity is done using ReactJS with local state.
 - Save the last image data into the user's browser.
 - Implement image loading skeleton for layout shifts
 - What happenes when we add a long title and long option names? Currently when we enter a long title, it will not add `.png` at the end of the file when saving the file. So we might wanna trim the file name when saving.
+- Add option for grid icon layout.
 - Other extensions mentioned [here](https://github.com/Gear61/Software-Project-Ideas/blob/main/LinkedIn%20Reaction%20Poll%20Generator.md#possible-extensions)
