@@ -24,8 +24,13 @@ import love from './img/love.png'
 import insightful from './img/insightful.png'
 import curious from './img/curious.png'
 
+import one_row from './img/one_row.png'
+import two_col from './img/two_col.png'
+import three_col from './img/three_col.png'
+
 function App() {
   const [pollTitle, setPollTitle] = useState('Who is your favorite CEO?')
+  const [layoutOption, setLayoutOption] = useState('one_row')
   const [showLike, setShowLike] = useState({
     isShowing: true,
     text: 'Mark Zuckerberg',
@@ -59,11 +64,14 @@ function App() {
 
   function downloadImage() {
     const options = { width: 540 }
+    // Trim the long title to 80 chars to avoid saving bug
+    let title = pollTitle.substring(0, 80)
+
     const nodeElement = document.querySelector('.preview')
     domtoimage
-      .toBlob(nodeElement, options)
+      .toBlob(nodeElement)
       .then(function (blob) {
-        window.saveAs(blob, `poll-${pollTitle}`)
+        window.saveAs(blob, `poll-${title}`)
         trackDownloadEvent()
       })
       .catch((err) => {
@@ -79,27 +87,112 @@ function App() {
       <header className="header">
         <div className="wrapper">
           <h1>
-            <a href="/">LinkedIn Reaction Poll Generator </a>
+            <a href="/">ReactionPoll.com</a>
             <span id="beta">(Beta)</span>
           </h1>
-          <p className="tagline">Get more engagements with reaction polls</p>
+          <p className="tagline">
+            LinkedIn Reaction Poll Generator: Get more engagements with reaction
+            polls
+          </p>
         </div>
       </header>
       <div className="container">
         <form className="poll">
-          <div className="title">
-            <label htmlFor="poll_title" className="step_text">
-              Poll Title:
-            </label>
-            <br />
-            <input
-              type="text"
-              name="poll_title"
-              id="poll_title"
-              onChange={(e) => setPollTitle(e.target.value)}
-            />
+          <div className="demo">
+            <aside className="options">
+              <div className="title">
+                <label htmlFor="poll_title" className="step_text">
+                  Poll Title:
+                </label>
+                <br />
+                <input
+                  type="text"
+                  name="poll_title"
+                  id="poll_title"
+                  onChange={(e) => setPollTitle(e.target.value)}
+                />
+              </div>
+
+              <p className="step_text">Layout Option:</p>
+              <div className="options__layout">
+                <div>
+                  <input
+                    type="radio"
+                    name="option_layout"
+                    id="one_row"
+                    value="one_row"
+                    onChange={(e) => setLayoutOption(e.target.value)}
+                  />
+                  <label htmlFor="one_row">
+                    <img src={one_row} alt="One row" />
+                  </label>
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    name="option_layout"
+                    id="two_col"
+                    value="two_col"
+                    onChange={(e) => setLayoutOption(e.target.value)}
+                  />
+                  <label htmlFor="two_col">
+                    <img src={two_col} alt="Two col" />
+                  </label>
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    name="option_layout"
+                    id="three_col"
+                    value="three_col"
+                    onChange={(e) => setLayoutOption(e.target.value)}
+                  />
+                  <label htmlFor="three_col">
+                    <img src={three_col} alt="Three col" />
+                  </label>
+                </div>
+              </div>
+              <DownloadButton />
+            </aside>
+            <div className="demo__wrap">
+              <div className="preview">
+                <div className="preview__title">{pollTitle}</div>
+                <div className={`preview__icons ${layoutOption}`}>
+                  {showLike.isShowing && (
+                    <div className="preview__icon">
+                      <img src={like} alt="like Button" />
+                      <p>{showLike.text}</p>
+                    </div>
+                  )}
+                  {showCelebrate.isShowing && (
+                    <div className="preview__icon">
+                      <img src={celebrate} alt="curious Button" />
+                      <p>{showCelebrate.text}</p>
+                    </div>
+                  )}
+                  {showLove.isShowing && (
+                    <div className="preview__icon">
+                      <img src={love} alt="love Button" />
+                      <p>{showLove.text}</p>
+                    </div>
+                  )}
+                  {showInsightful.isShowing && (
+                    <div className="preview__icon">
+                      <img src={insightful} alt="insightful Button" />
+                      <p>{showInsightful.text}</p>
+                    </div>
+                  )}
+                  {showCurious.isShowing && (
+                    <div className="preview__icon">
+                      <img src={curious} alt="curious Button" />
+                      <p>{showCurious.text}</p>
+                    </div>
+                  )}
+                </div>
+                <div className="preview__watermark">ReactionPoll.com</div>
+              </div>
+            </div>
           </div>
-          <Preview />
           <p className="step_text">Select icons and text for poll options:</p>
           <div className="reaction">
             <div
@@ -352,63 +445,12 @@ function App() {
     </>
   )
 
-  // Show the reaction icons to choose
-  function ReactionOptions() {
-    return null
-  }
-
   // Download Button
   function DownloadButton() {
     return (
-      <button id="download" onClick={downloadImage}>
+      <button id="download" type="button" onClick={downloadImage}>
         Download Image
       </button>
-    )
-  }
-
-  // Preview Div
-  function Preview() {
-    return (
-      <div className="demo">
-        <div className="demo__wrap">
-          <div className="preview">
-            <div className="preview__title">{pollTitle}</div>
-            <div className="preview__icons">
-              {showLike.isShowing && (
-                <div className="preview__icon">
-                  <img src={like} alt="like Button" />
-                  <p>{showLike.text}</p>
-                </div>
-              )}
-              {showCelebrate.isShowing && (
-                <div className="preview__icon">
-                  <img src={celebrate} alt="curious Button" />
-                  <p>{showCelebrate.text}</p>
-                </div>
-              )}
-              {showLove.isShowing && (
-                <div className="preview__icon">
-                  <img src={love} alt="love Button" />
-                  <p>{showLove.text}</p>
-                </div>
-              )}
-              {showInsightful.isShowing && (
-                <div className="preview__icon">
-                  <img src={insightful} alt="insightful Button" />
-                  <p>{showInsightful.text}</p>
-                </div>
-              )}
-              {showCurious.isShowing && (
-                <div className="preview__icon">
-                  <img src={curious} alt="curious Button" />
-                  <p>{showCurious.text}</p>
-                </div>
-              )}
-            </div>
-            <div className="preview__watermark">ReactionPoll.com</div>
-          </div>
-        </div>
-      </div>
     )
   }
 }
