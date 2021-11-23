@@ -52,18 +52,26 @@ function App() {
   }, [])
 
   function trackDownloadEvent() {
-    gtag('event', 'download_poll', {
-      title: pollTitle,
+    gtag('event', 'download_poll_image', {
+      poll_title: pollTitle,
     })
   }
 
   function downloadImage() {
     const options = { width: 540 }
     const nodeElement = document.querySelector('.preview')
-    domtoimage.toBlob(nodeElement, options).then(function (blob) {
-      window.saveAs(blob, `poll-${pollTitle}`)
-    })
-    trackDownloadEvent()
+    domtoimage
+      .toBlob(nodeElement, options)
+      .then(function (blob) {
+        window.saveAs(blob, `poll-${pollTitle}`)
+        trackDownloadEvent()
+      })
+      .catch((err) => {
+        gtag('event', 'DOWNLOAD_FAILED', {
+          poll_title: pollTitle,
+          error_info: err.message,
+        })
+      })
   }
 
   return (
@@ -94,7 +102,11 @@ function App() {
           <Preview />
           <p className="step_text">Select icons and text for poll options:</p>
           <div className="reaction">
-            <div className="reaction__icon">
+            <div
+              className={`reaction__icon ${
+                showLike.isShowing ? null : 'grayscale'
+              }`}
+            >
               <div className="reaction__icon__wrap">
                 <input
                   type="checkbox"
@@ -125,7 +137,11 @@ function App() {
                 }
               />
             </div>
-            <div className="reaction__icon">
+            <div
+              className={`reaction__icon ${
+                showCelebrate.isShowing ? null : 'grayscale'
+              }`}
+            >
               <div className="reaction__icon__wrap">
                 <input
                   type="checkbox"
@@ -156,7 +172,11 @@ function App() {
                 }
               />
             </div>
-            <div className="reaction__icon">
+            <div
+              className={`reaction__icon ${
+                showLove.isShowing ? null : 'grayscale'
+              }`}
+            >
               <div className="reaction__icon__wrap">
                 <input
                   type="checkbox"
@@ -187,7 +207,11 @@ function App() {
                 }
               />
             </div>
-            <div className="reaction__icon">
+            <div
+              className={`reaction__icon ${
+                showInsightful.isShowing ? null : 'grayscale'
+              }`}
+            >
               <div className="reaction__icon__wrap">
                 <input
                   type="checkbox"
@@ -218,7 +242,11 @@ function App() {
                 }
               />
             </div>
-            <div className="reaction__icon">
+            <div
+              className={`reaction__icon ${
+                showCurious.isShowing ? null : 'grayscale'
+              }`}
+            >
               <div className="reaction__icon__wrap">
                 <input
                   type="checkbox"
@@ -251,7 +279,7 @@ function App() {
             </div>
           </div>
         </form>
-        <p className="step_text">Download The Picture:</p>
+        <p className="step_text">Click Button to Download The Picture:</p>
         <DownloadButton />
         <h3>Tips for better engagements:</h3>
         <ul>
@@ -324,11 +352,16 @@ function App() {
     </>
   )
 
+  // Show the reaction icons to choose
+  function ReactionOptions() {
+    return null
+  }
+
   // Download Button
   function DownloadButton() {
     return (
       <button id="download" onClick={downloadImage}>
-        Download Image <i class="fas fa-download"></i>
+        Download Image
       </button>
     )
   }
