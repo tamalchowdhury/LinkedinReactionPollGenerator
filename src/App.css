@@ -14,6 +14,7 @@ limitations under the License.
 :root {
   --theme-color: #2867b2;
   --button-color: #ffd966;
+  --checkbox-color: #6dae4f;
 }
 
 *,
@@ -143,6 +144,7 @@ img {
 .reaction__icon input[type='checkbox'] {
   cursor: pointer;
   zoom: 1.3;
+  accent-color: var(--checkbox-color);
 }
 
 .reaction__icon img {
