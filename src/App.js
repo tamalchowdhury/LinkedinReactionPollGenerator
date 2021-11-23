@@ -15,6 +15,7 @@ import './App.css'
 import domtoimage from 'dom-to-image'
 import { saveAs } from 'file-saver'
 import GitHubButton from 'react-github-btn'
+import gtag, { install } from 'ga-gtag'
 
 import { useEffect, useState } from 'react'
 import like from './img/like.png'
@@ -46,12 +47,23 @@ function App() {
     text: 'Curious',
   })
 
+  useEffect(() => {
+    install('G-5R73T1TP2W')
+  }, [])
+
+  function trackDownloadEvent() {
+    gtag('event', 'download_poll', {
+      title: pollTitle,
+    })
+  }
+
   function downloadImage() {
     const options = { width: 540 }
     const nodeElement = document.querySelector('.preview')
     domtoimage.toBlob(nodeElement, options).then(function (blob) {
       window.saveAs(blob, `poll-${pollTitle}`)
     })
+    trackDownloadEvent()
   }
 
   return (
