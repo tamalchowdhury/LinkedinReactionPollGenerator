@@ -53,7 +53,7 @@ function App() {
   })
 
   useEffect(() => {
-    install('G-B2L1N2RSKB')
+    install('G-KCF1P1P69X')
   }, [])
 
   function trackDownloadEvent() {
