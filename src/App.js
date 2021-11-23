@@ -405,6 +405,7 @@ function App() {
                 </div>
               )}
             </div>
+            <div className="preview__watermark">ReactionPoll.com</div>
           </div>
         </div>
       </div>

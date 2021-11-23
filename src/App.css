@@ -187,6 +187,7 @@ img {
   padding: 2rem;
   background: #fff;
   margin: 0 auto;
+  position: relative;
 }
 
 .preview__title {
@@ -213,6 +214,15 @@ img {
 .preview__icon p {
   font-size: 1.2rem;
   font-weight: bold;
+}
+
+.preview__watermark {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  font-weight: bold;
+  color: #666;
+  font-size: 14px;
 }
 
 .footer {
