@@ -52,10 +52,6 @@ function App() {
     text: 'Curious',
   })
 
-  useEffect(() => {
-    install('G-KCF1P1P69X')
-  }, [])
-
   function trackDownloadEvent() {
     gtag('event', 'download_poll_image', {
       poll_title: pollTitle,
