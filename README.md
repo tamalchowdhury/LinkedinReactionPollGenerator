@@ -44,7 +44,7 @@ The main interactivity is done using ReactJS with local state.
 - Variable text size for legibility.
 - Need to make this app usable on the mobile. Right now it's not very friendly, because it's best fit as a desktop app.
 - Implement accessibility.
-- Browser testing.
+- Browser testing. (works well on all major browsers. IE 11 shows blank page)
 - Need to fix bugs after user testing.
 - A reset button to clear all the text.
 - Refactor the code.
@@ -58,6 +58,7 @@ The main interactivity is done using ReactJS with local state.
 
 ## Done
 
+- Mobile responsive
 - Bought domain name
 - Add google analytics for page views and custom events for image download button clicks.
 - Add github star button.
