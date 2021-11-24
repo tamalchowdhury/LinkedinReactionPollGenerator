@@ -86,10 +86,7 @@ function App() {
             <a href="/">ReactionPoll.com</a>
             <span id="beta">(Beta)</span>
           </h1>
-          <p className="tagline">
-            LinkedIn Reaction Poll Generator: Get more engagements with reaction
-            polls
-          </p>
+          <p className="tagline">Get more engagements with reaction polls</p>
         </div>
       </header>
       <div className="container">
@@ -151,41 +148,44 @@ function App() {
               <DownloadButton />
             </aside>
             <div className="demo__wrap">
-              <div className="preview">
-                <div className="preview__title">{pollTitle}</div>
-                <div className={`preview__icons ${layoutOption}`}>
-                  {showLike.isShowing && (
-                    <div className="preview__icon">
-                      <img src={like} alt="like Button" />
-                      <p>{showLike.text}</p>
-                    </div>
-                  )}
-                  {showCelebrate.isShowing && (
-                    <div className="preview__icon">
-                      <img src={celebrate} alt="curious Button" />
-                      <p>{showCelebrate.text}</p>
-                    </div>
-                  )}
-                  {showLove.isShowing && (
-                    <div className="preview__icon">
-                      <img src={love} alt="love Button" />
-                      <p>{showLove.text}</p>
-                    </div>
-                  )}
-                  {showInsightful.isShowing && (
-                    <div className="preview__icon">
-                      <img src={insightful} alt="insightful Button" />
-                      <p>{showInsightful.text}</p>
-                    </div>
-                  )}
-                  {showCurious.isShowing && (
-                    <div className="preview__icon">
-                      <img src={curious} alt="curious Button" />
-                      <p>{showCurious.text}</p>
-                    </div>
-                  )}
+              <div>
+                <div className="preview__text">PREVIEW:</div>
+                <div className="preview">
+                  <div className="preview__title">{pollTitle}</div>
+                  <div className={`preview__icons ${layoutOption}`}>
+                    {showLike.isShowing && (
+                      <div className="preview__icon">
+                        <img src={like} alt="like Button" />
+                        <p>{showLike.text}</p>
+                      </div>
+                    )}
+                    {showCelebrate.isShowing && (
+                      <div className="preview__icon">
+                        <img src={celebrate} alt="curious Button" />
+                        <p>{showCelebrate.text}</p>
+                      </div>
+                    )}
+                    {showLove.isShowing && (
+                      <div className="preview__icon">
+                        <img src={love} alt="love Button" />
+                        <p>{showLove.text}</p>
+                      </div>
+                    )}
+                    {showInsightful.isShowing && (
+                      <div className="preview__icon">
+                        <img src={insightful} alt="insightful Button" />
+                        <p>{showInsightful.text}</p>
+                      </div>
+                    )}
+                    {showCurious.isShowing && (
+                      <div className="preview__icon">
+                        <img src={curious} alt="curious Button" />
+                        <p>{showCurious.text}</p>
+                      </div>
+                    )}
+                  </div>
+                  <div className="preview__watermark">ReactionPoll.com</div>
                 </div>
-                <div className="preview__watermark">ReactionPoll.com</div>
               </div>
             </div>
           </div>
