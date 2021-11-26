@@ -1,4 +1,23 @@
-.facebook {
-  background: blue;
-  color: red;
+.fbpreview {
+  background: #efefef;
+
+  &__icons {
+    display: flex;
+    justify-content: space-around;
+    min-height: 400px;
+
+    &__icon {
+      background: url('./img/barbara.jpg');
+      background-size: cover;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+
+      & img {
+        width: 150px;
+        height: 150px;
+      }
+    }
+  }
 }
