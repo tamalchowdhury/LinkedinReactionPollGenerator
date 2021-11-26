@@ -320,7 +320,7 @@ img {
   background: #fbc02d;
 }
 
-@media (max-width: 375px) {
+@media (max-width: 415px) {
   .header > .wrapper {
     text-align: center;
   }
