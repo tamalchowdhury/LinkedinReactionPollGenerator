@@ -1,0 +1,39 @@
+// Facebook Poll options right sidebar
+
+.fboption {
+  flex-grow: 1;
+  width: 300px;
+
+  &__label {
+    display: block;
+    font-weight: bold;
+    margin: 1rem 0;
+  }
+
+  &__checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  &__checkbox {
+    display: flex;
+    align-items: center;
+
+    & img {
+      cursor: pointer;
+      width: 48px;
+    }
+
+    & input[type='checkbox'] {
+      zoom: 1.5;
+      cursor: pointer;
+    }
+  }
+
+  &__item {
+    padding: 1rem;
+    background: #efefef;
+    border-radius: 5px;
+  }
+}
