@@ -1,3 +1,6 @@
+import domtoimage from 'dom-to-image'
+import { saveAs } from 'file-saver'
+
 import like from '../img/fb/like.png'
 import love from '../img/fb/love.png'
 import haha from '../img/fb/haha.png'
@@ -6,6 +9,7 @@ import sad from '../img/fb/sad.png'
 import angry from '../img/fb/angry.png'
 import care from '../img/fb/care.png'
 
+import bg from '../img/fb/ken.jpg'
 const icons = {
   like,
   love,
@@ -16,23 +20,43 @@ const icons = {
   care,
 }
 
+function downloadImage() {
+  const nodeElement = document.querySelector('.fbpreview')
+  domtoimage
+    .toBlob(nodeElement)
+    .then(function (blob) {
+      window.saveAs(blob, `poll-SOME_TITLE`)
+    })
+    .catch((err) => {
+      // Track the error
+    })
+}
+
 const PreviewIconDiv = ({ icon }) => {
   return (
-    <div className="fbpreview__icons__icon">
+    <div
+      className="fbpreview__icons__icon"
+      style={{ backgroundImage: `url(${bg})` }}
+    >
       <img src={icons[icon]} alt={icon} />
     </div>
   )
 }
 
-const reactions = ['angry', 'love']
+const reactions = ['like', 'love', 'care']
 
 export default function Facebook() {
   return (
-    <div>
-      <aside className="fboption">Poll Options will go here</aside>
+    <div className="content">
+      <aside className="fboption">
+        Poll Options will go here
+        <button onClick={downloadImage}>Download image</button>
+      </aside>
       {/* The preview will go here.. */}
       <div className="fbpreview">
-        <div className="fbpreview__title">Title will go here</div>
+        <div className="fbpreview__title">
+          Who is your favorite GTA Character?
+        </div>
         <div className="fbpreview__icons">
           {reactions.map((icon) => (
             <PreviewIconDiv icon={icon} />

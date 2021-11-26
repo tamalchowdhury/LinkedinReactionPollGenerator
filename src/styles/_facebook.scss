@@ -1,22 +1,59 @@
+$text-color: #ffffff;
+
+.content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.fboption {
+  flex-grow: 1;
+}
+
 .fbpreview {
   background: #efefef;
+  flex-grow: 4;
+  max-width: 800px;
+  position: relative;
+
+  &__title {
+    position: absolute;
+    color: $text-color;
+    font-size: 3rem;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+
+  &__watermark {
+    position: absolute;
+    color: $text-color;
+    font-weight: bold;
+    right: 10px;
+    bottom: 10px;
+  }
 
   &__icons {
     display: flex;
     justify-content: space-around;
-    min-height: 400px;
+    aspect-ratio: 4/3; // Experimental, so use some fallbacks
 
     &__icon {
       background: url('./img/barbara.jpg');
       background-size: cover;
+      background-position: center;
       width: 100%;
       display: flex;
       justify-content: space-around;
       align-items: center;
+      align-items: flex-end;
+      padding-block-end: 2rem;
 
       & img {
         width: 150px;
-        height: 150px;
+        height: autopx;
       }
     }
   }

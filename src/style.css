@@ -1,5 +1,45 @@
+.content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.fboption {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
 .fbpreview {
   background: #efefef;
+  -webkit-box-flex: 4;
+      -ms-flex-positive: 4;
+          flex-grow: 4;
+  max-width: 800px;
+  position: relative;
+}
+
+.fbpreview__title {
+  position: absolute;
+  color: #ffffff;
+  font-size: 3rem;
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.fbpreview__watermark {
+  position: absolute;
+  color: #ffffff;
+  font-weight: bold;
+  right: 10px;
+  bottom: 10px;
 }
 
 .fbpreview__icons {
@@ -8,12 +48,13 @@
   display: flex;
   -ms-flex-pack: distribute;
       justify-content: space-around;
-  min-height: 400px;
+  aspect-ratio: 4/3;
 }
 
 .fbpreview__icons__icon {
   background: url("./img/barbara.jpg");
   background-size: cover;
+  background-position: center;
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -23,10 +64,15 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -webkit-padding-after: 2rem;
+          padding-block-end: 2rem;
 }
 
 .fbpreview__icons__icon img {
   width: 150px;
-  height: 150px;
+  height: autopx;
 }
 /*# sourceMappingURL=style.css.map */
