@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "ACAA,AAAA,SAAS,CAAC;EACR,UAAU,EAAE,IAAI;EAChB,KAAK,EAAE,GAAG;CACX",
+    "sources": [
+        "styles/style.scss",
+        "styles/_facebook.scss"
+    ],
+    "names": [],
+    "file": "style.css"
+}
