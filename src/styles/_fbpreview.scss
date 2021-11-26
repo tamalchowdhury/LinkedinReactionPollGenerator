@@ -3,7 +3,7 @@
 .fbpreview {
   background: #efefef;
   flex-grow: 4;
-  max-width: 800px;
+  // max-width: 800px;
   position: relative;
 
   &__title {
@@ -16,6 +16,7 @@
     left: 0;
     right: 0;
     text-align: center;
+    text-shadow: 2px 2px 2px #000;
   }
 
   &__watermark {
@@ -24,15 +25,16 @@
     font-weight: bold;
     right: 10px;
     bottom: 10px;
+    text-shadow: 2px 2px 2px #000;
   }
 
   &__icons {
     display: flex;
     justify-content: space-around;
+    height: 100%;
     aspect-ratio: 4/3; // Experimental, so use some fallbacks
 
     &__icon {
-      background: url('./img/barbara.jpg');
       background-size: cover;
       background-position: center;
       width: 100%;
@@ -41,6 +43,25 @@
       align-items: center;
       align-items: flex-end;
       padding-block-end: 2rem;
+
+      &__like {
+        background-color: #c1deec;
+      }
+
+      &__love,
+      &__care {
+        background-color: #f8b8c0;
+      }
+
+      &__angry {
+        background-color: #fa9956;
+      }
+
+      &__haha,
+      &__sad,
+      &__wow {
+        background-color: #f8edc7;
+      }
 
       & img {
         width: 150px;

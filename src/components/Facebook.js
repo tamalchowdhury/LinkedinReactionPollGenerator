@@ -10,7 +10,7 @@ import angry from '../img/fb/angry.png'
 import care from '../img/fb/care.png'
 
 import bg from '../img/fb/ken.jpg'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 const icons = {
   like,
   love,
@@ -35,20 +35,26 @@ function downloadImage() {
     })
 }
 
-const PreviewIconDiv = ({ icon }) => {
-  return (
-    <div
-      className="fbpreview__icons__icon"
-      style={{ backgroundImage: `url(${bg})` }}
-    >
-      <img src={icons[icon]} alt={icon} />
-    </div>
-  )
+function getBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif']
+    if (!allowedTypes.includes(file.type)) {
+      window.alert('Only jpg, png & gif image files are allowed!')
+      return
+    }
+    reader.readAsDataURL(file)
+    reader.onload = () => resolve(reader.result)
+    reader.onerror = (error) => reject(error)
+  })
 }
 
 const reactions = ['like', 'love', 'care']
 
 export default function Facebook() {
+  const [pollTitle, setPollTitle] = useState(
+    'Who is your favorite GTA Character?'
+  )
   const [previewIcon, setPreviewIcon] = useState({
     like: {
       isShowing: true,
@@ -87,6 +93,41 @@ export default function Facebook() {
     },
   })
 
+  const PreviewIconDiv = ({ icon }) => {
+    return (
+      <div
+        className={`fbpreview__icons__icon fbpreview__icons__icon__${icon}`}
+        style={{ backgroundImage: `url(${previewIcon[icon].image})` }}
+      >
+        <img src={icons[icon]} alt={icon} />
+      </div>
+    )
+  }
+
+  // Take file from the computer and store it into the state
+  function uploadImage(event, icon) {
+    getBase64(event.currentTarget.files[0]).then((imageData) => {
+      let state = { ...previewIcon }
+      state[icon].image = imageData
+      return setPreviewIcon(state)
+    })
+  }
+
+  const OptionItemDiv = ({ icon }) => {
+    return (
+      <div className="fboption__item">
+        <label htmlFor="">{icon}</label>
+        <input type="text" />
+        <input
+          type="file"
+          name=""
+          id=""
+          onChange={(e) => uploadImage(e, icon)}
+        />
+      </div>
+    )
+  }
+
   const OptionCheckboxIcon = ({ icon }) => {
     return (
       <div className="fboption__checkbox">
@@ -108,14 +149,6 @@ export default function Facebook() {
     )
   }
 
-  const demoData = {
-    like: {
-      isShowing: true,
-      label: 'text',
-      image: 'image url/data',
-    },
-  }
-
   return (
     <div className="content">
       {/* The Options Div */}
@@ -125,7 +158,12 @@ export default function Facebook() {
           <label className="fboption__label" htmlFor="poll-title">
             Poll Title:
           </label>
-          <input type="text" name="poll-title" id="poll-title" />
+          <input
+            type="text"
+            name="poll-title"
+            id="poll-title"
+            onChange={(e) => setPollTitle(e.target.value)}
+          />
         </section>
         {/* Icon Checkboxes */}
         <section>
@@ -141,22 +179,26 @@ export default function Facebook() {
         {/* Each icon input options */}
         <section>
           <h3>Enter Poll Option Details</h3>
-          <div className="fboption__item">
-            <label htmlFor="">Like</label>
-            <input type="text" />
-            <input type="file" name="" id="" />
-          </div>
+          {checkboxItems
+            .filter((item) => previewIcon[item].isShowing)
+            .map((icon) => (
+              <OptionItemDiv icon={icon} />
+            ))}
+        </section>
+        {/* Download Button */}
+        <section>
+          <button onClick={downloadImage}>Download</button>
         </section>
       </aside>
       {/* The preview div */}
       <div className="fbpreview">
-        <div className="fbpreview__title">
-          Who is your favorite GTA Character?
-        </div>
+        <div className="fbpreview__title">{pollTitle}</div>
         <div className="fbpreview__icons">
-          {reactions.map((icon) => (
-            <PreviewIconDiv icon={icon} />
-          ))}
+          {checkboxItems
+            .filter((item) => previewIcon[item].isShowing)
+            .map((icon) => (
+              <PreviewIconDiv icon={icon} />
+            ))}
         </div>
         <div className="fbpreview__watermark">ReactionPoll.com</div>
       </div>

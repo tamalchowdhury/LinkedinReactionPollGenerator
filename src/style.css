@@ -50,6 +50,7 @@
 
 .fboption__item {
   padding: 1rem;
+  margin: 1rem 0;
   background: #efefef;
   border-radius: 5px;
 }
@@ -59,7 +60,6 @@
   -webkit-box-flex: 4;
       -ms-flex-positive: 4;
           flex-grow: 4;
-  max-width: 800px;
   position: relative;
 }
 
@@ -73,6 +73,7 @@
   left: 0;
   right: 0;
   text-align: center;
+  text-shadow: 2px 2px 2px #000;
 }
 
 .fbpreview__watermark {
@@ -81,6 +82,7 @@
   font-weight: bold;
   right: 10px;
   bottom: 10px;
+  text-shadow: 2px 2px 2px #000;
 }
 
 .fbpreview__icons {
@@ -89,11 +91,11 @@
   display: flex;
   -ms-flex-pack: distribute;
       justify-content: space-around;
+  height: 100%;
   aspect-ratio: 4/3;
 }
 
 .fbpreview__icons__icon {
-  background: url("./img/barbara.jpg");
   background-size: cover;
   background-position: center;
   width: 100%;
@@ -110,6 +112,22 @@
           align-items: flex-end;
   -webkit-padding-after: 2rem;
           padding-block-end: 2rem;
+}
+
+.fbpreview__icons__icon__like {
+  background-color: #c1deec;
+}
+
+.fbpreview__icons__icon__love, .fbpreview__icons__icon__care {
+  background-color: #f8b8c0;
+}
+
+.fbpreview__icons__icon__angry {
+  background-color: #fa9956;
+}
+
+.fbpreview__icons__icon__haha, .fbpreview__icons__icon__sad, .fbpreview__icons__icon__wow {
+  background-color: #f8edc7;
 }
 
 .fbpreview__icons__icon img {
