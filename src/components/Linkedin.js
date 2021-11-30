@@ -13,6 +13,20 @@ import one_row from '../img/one_row.png'
 import two_col from '../img/two_col.png'
 import three_col from '../img/three_col.png'
 
+const ImgWithFallback = ({
+  src,
+  fallback,
+  type = 'image/webp',
+  ...delegated
+}) => {
+  return (
+    <picture>
+      <source srcSet={src} type={type} />
+      <img src={fallback} {...delegated} />
+    </picture>
+  )
+}
+
 export default function Linkedin() {
   const [pollTitle, setPollTitle] = useState('Who is your favorite CEO?')
   const [layoutOption, setLayoutOption] = useState('one_row')
