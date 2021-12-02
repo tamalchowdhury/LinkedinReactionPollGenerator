@@ -91,11 +91,34 @@ input[type='checkbox'] {
   border-radius: 5px;
 }
 
+.fboption__item__label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 5px;
+}
+
 .fboption__item__img {
+  position: relative;
   background-size: cover;
-  border: 3px solid #fff;
+  border: 5px solid #fff;
+  border-radius: 3px;
   width: 80px;
   height: 80px;
+}
+
+.fboption__item__img__close {
+  cursor: pointer;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 20px;
+  height: 20px;
+  border: 0;
+  border-radius: 50%;
+  background: #eb510a;
+  color: #fff;
+  font-weight: bold;
 }
 
 .fbpreview {

@@ -79,6 +79,114 @@ function getBase64(file) {
 
 const reactions = ['like', 'love', 'care']
 
+// Take file from the computer and store it into the state
+function uploadImage(event, previewIcon, setPreviewIcon, icon) {
+  getBase64(event.currentTarget.files[0]).then((imageData) => {
+    let state = { ...previewIcon }
+    state[icon].image = imageData
+    return setPreviewIcon(state)
+  })
+}
+
+const OptionItemDiv = ({ previewIcon, setPreviewIcon, icon }) => {
+  return (
+    <div className="fboption__item">
+      <div className="fboption__item__label">
+        <label htmlFor={`image_${icon}`}>Background image for {icon}</label>
+        <ImgWithFallback
+          src={webps[icon]}
+          fallback={pngs[icon]}
+          alt={`Mini icon for ${icon}`}
+          height={20}
+          width={20}
+        />
+      </div>
+      {previewIcon[icon].image ? (
+        <>
+          <div
+            className="fboption__item__img"
+            style={{ backgroundImage: `url(${previewIcon[icon].image})` }}
+          >
+            <button
+              type="button"
+              className="fboption__item__img__close"
+              onClick={() => {
+                const state = { ...previewIcon }
+                state[icon].image = undefined
+                return setPreviewIcon(state)
+              }}
+            >
+              &times;
+            </button>
+          </div>
+        </>
+      ) : (
+        <input
+          type="file"
+          name={`image_${icon}`}
+          id={`image_${icon}`}
+          onChange={(e) => uploadImage(e, previewIcon, setPreviewIcon, icon)}
+        />
+      )}
+
+      <label htmlFor="">Label for {icon} (optional)</label>
+      <input
+        type="text"
+        value={previewIcon[icon].label}
+        onChange={(e) => {
+          const state = { ...previewIcon }
+          state[icon].label = e.target.value
+          return setPreviewIcon(state)
+        }}
+      />
+    </div>
+  )
+}
+
+const OptionCheckboxIcon = ({ previewIcon, setPreviewIcon, icon }) => {
+  return (
+    <div
+      className={`fboption__checkbox ${
+        previewIcon[icon].isShowing ? '' : 'grayscale'
+      }`}
+    >
+      <input
+        type="checkbox"
+        name={icon}
+        id={icon}
+        checked={previewIcon[icon].isShowing}
+        onChange={(e) => {
+          let state = { ...previewIcon }
+          state[icon].isShowing = e.target.checked
+          return setPreviewIcon(state)
+        }}
+      />
+      <label htmlFor={icon}>
+        <ImgWithFallback
+          src={webps[icon]}
+          fallback={pngs[icon]}
+          alt={`Icon for ${icon}`}
+          width={48}
+          height={48}
+          title={`Icon for ${icon}`}
+        />
+      </label>
+    </div>
+  )
+}
+
+const PreviewIconDiv = ({ previewIcon, setPreviewIcon, icon }) => {
+  return (
+    <div
+      className={`fbpreview__icons__icon fbpreview__icons__icon__${icon}`}
+      style={{ backgroundImage: `url(${previewIcon[icon].image})` }}
+    >
+      <p>{previewIcon[icon].label}</p>
+      <img src={icons[icon]} alt={icon} />
+    </div>
+  )
+}
+
 export default function Facebook() {
   const [pollTitle, setPollTitle] = useState(
     'Who is your favorite GTA Character?'
@@ -121,94 +229,6 @@ export default function Facebook() {
     },
   })
 
-  const PreviewIconDiv = ({ icon }) => {
-    return (
-      <div
-        className={`fbpreview__icons__icon fbpreview__icons__icon__${icon}`}
-        style={{ backgroundImage: `url(${previewIcon[icon].image})` }}
-      >
-        <img src={icons[icon]} alt={icon} />
-      </div>
-    )
-  }
-
-  // Take file from the computer and store it into the state
-  function uploadImage(event, icon) {
-    getBase64(event.currentTarget.files[0]).then((imageData) => {
-      let state = { ...previewIcon }
-      state[icon].image = imageData
-      return setPreviewIcon(state)
-    })
-  }
-
-  const OptionItemDiv = ({ icon }) => {
-    return (
-      <div className="fboption__item">
-        <label htmlFor={`image_${icon}`}>Image for {icon}</label>
-
-        {previewIcon[icon].image ? (
-          <>
-            <div
-              className="fboption__item__img"
-              style={{ backgroundImage: `url(${previewIcon[icon].image})` }}
-            ></div>
-            <button
-              onClick={() => {
-                const state = { ...previewIcon }
-                state[icon].image = undefined
-                return setPreviewIcon(state)
-              }}
-            >
-              &times; Close
-            </button>
-          </>
-        ) : (
-          <input
-            type="file"
-            name={`image_${icon}`}
-            id={`image_${icon}`}
-            onChange={(e) => uploadImage(e, icon)}
-          />
-        )}
-
-        <label htmlFor="">Label for {icon} (optional)</label>
-        <input type="text" />
-      </div>
-    )
-  }
-
-  const OptionCheckboxIcon = ({ icon }) => {
-    return (
-      <div
-        className={`fboption__checkbox ${
-          previewIcon[icon].isShowing ? '' : 'grayscale'
-        }`}
-      >
-        <input
-          type="checkbox"
-          name={icon}
-          id={icon}
-          checked={previewIcon[icon].isShowing}
-          onChange={(e) => {
-            let state = { ...previewIcon }
-            state[icon].isShowing = e.target.checked
-            return setPreviewIcon(state)
-          }}
-        />
-        <label htmlFor={icon}>
-          <ImgWithFallback
-            src={webps[icon]}
-            fallback={pngs[icon]}
-            alt={`Icon for ${icon}`}
-            width={48}
-            height={48}
-            title={`Icon for ${icon}`}
-          />
-        </label>
-      </div>
-    )
-  }
-
   return (
     <div className="content">
       {/* The Options Div */}
@@ -232,7 +252,12 @@ export default function Facebook() {
           </label>
           <div className="fboption__checkboxes">
             {checkboxItems.map((icon) => (
-              <OptionCheckboxIcon icon={icon} />
+              <OptionCheckboxIcon
+                previewIcon={previewIcon}
+                setPreviewIcon={setPreviewIcon}
+                icon={icon}
+                key={`option_${icon}`}
+              />
             ))}
           </div>
         </section>
@@ -242,7 +267,12 @@ export default function Facebook() {
           {checkboxItems
             .filter((item) => previewIcon[item].isShowing)
             .map((icon) => (
-              <OptionItemDiv icon={icon} />
+              <OptionItemDiv
+                previewIcon={previewIcon}
+                setPreviewIcon={setPreviewIcon}
+                icon={icon}
+                key={`checkbox_${icon}`}
+              />
             ))}
         </section>
         {/* Download Button */}
@@ -257,7 +287,12 @@ export default function Facebook() {
           {checkboxItems
             .filter((item) => previewIcon[item].isShowing)
             .map((icon) => (
-              <PreviewIconDiv icon={icon} />
+              <PreviewIconDiv
+                previewIcon={previewIcon}
+                setPreviewIcon={setPreviewIcon}
+                icon={icon}
+                key={`preview_${icon}`}
+              />
             ))}
         </div>
         <div className="fbpreview__watermark">ReactionPoll.com</div>
