@@ -13,6 +13,8 @@ limitations under the License.
 
 :root {
   --theme-color: #2867b2;
+  --light-color: #fff;
+  --dark-color: #000;
   --button-color: #ffd966;
   --checkbox-color: #6dae4f;
 }

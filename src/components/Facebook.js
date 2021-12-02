@@ -51,18 +51,6 @@ const webps = {
 
 const checkboxItems = ['like', 'love', 'haha', 'wow', 'sad', 'angry', 'care']
 
-function downloadImage() {
-  const nodeElement = document.querySelector('.fbpreview')
-  domtoimage
-    .toBlob(nodeElement)
-    .then(function (blob) {
-      window.saveAs(blob, `poll-SOME_TITLE`)
-    })
-    .catch((err) => {
-      // Track the error
-    })
-}
-
 function getBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
@@ -129,9 +117,10 @@ const OptionItemDiv = ({ previewIcon, setPreviewIcon, icon }) => {
         />
       )}
 
-      <label htmlFor="">Label for {icon} (optional)</label>
+      <label htmlFor={`label_${icon}`}>Label for {icon} (optional)</label>
       <input
         type="text"
+        id={`label_${icon}`}
         value={previewIcon[icon].label}
         onChange={(e) => {
           const state = { ...previewIcon }
@@ -175,56 +164,62 @@ const OptionCheckboxIcon = ({ previewIcon, setPreviewIcon, icon }) => {
   )
 }
 
-const PreviewIconDiv = ({ previewIcon, setPreviewIcon, icon }) => {
+const PreviewIconDiv = ({ previewIcon, align, icon }) => {
   return (
     <div
-      className={`fbpreview__icons__icon fbpreview__icons__icon__${icon}`}
+      className={`fbpreview__icons__icon fbpreview__icons__icon__${icon} ${align}`}
       style={{ backgroundImage: `url(${previewIcon[icon].image})` }}
     >
+      <img
+        src={pngs[icon]}
+        alt={`Reaction icon for ${icon}`}
+        width={150}
+        height="auto"
+      />
+
       <p>{previewIcon[icon].label}</p>
-      <img src={icons[icon]} alt={icon} />
     </div>
   )
 }
 
 export default function Facebook() {
-  const [pollTitle, setPollTitle] = useState(
-    'Who is your favorite GTA Character?'
-  )
+  const [pollTitle, setPollTitle] = useState('Who is your favorite?')
+  const [textColor, setTextColor] = useState('dark')
+  const [align, setAlign] = useState('middle') // bottom, middle, and top
   const [previewIcon, setPreviewIcon] = useState({
     like: {
       isShowing: true,
-      label: 'text',
+      label: 'Superman',
       image: undefined,
     },
     love: {
       isShowing: true,
-      label: 'text',
+      label: 'Batman',
       image: undefined,
     },
     haha: {
-      isShowing: true,
-      label: 'text',
+      isShowing: false,
+      label: undefined,
       image: undefined,
     },
     sad: {
       isShowing: false,
-      label: 'text',
+      label: undefined,
       image: undefined,
     },
     wow: {
       isShowing: false,
-      label: 'text',
+      label: undefined,
       image: undefined,
     },
     angry: {
       isShowing: false,
-      label: 'text',
+      label: undefined,
       image: undefined,
     },
     care: {
       isShowing: false,
-      label: 'text',
+      label: undefined,
       image: undefined,
     },
   })
@@ -240,6 +235,7 @@ export default function Facebook() {
           </label>
           <input
             type="text"
+            value={pollTitle}
             name="poll-title"
             id="poll-title"
             onChange={(e) => setPollTitle(e.target.value)}
@@ -259,6 +255,61 @@ export default function Facebook() {
                 key={`option_${icon}`}
               />
             ))}
+          </div>
+        </section>
+        <section>
+          <label htmlFor="">Text Color:</label>
+          <div className="fboption__radio__items">
+            <input
+              type="radio"
+              name="text_color"
+              id="dark"
+              value="dark"
+              checked={textColor === 'dark'}
+              onChange={(e) => setTextColor(e.target.value)}
+            />
+            <label htmlFor="dark">Dark</label>
+            <input
+              type="radio"
+              name="text_color"
+              id="light"
+              value="light"
+              checked={textColor === 'light'}
+              onChange={(e) => setTextColor(e.target.value)}
+            />
+            <label htmlFor="light">Light</label>
+          </div>
+        </section>
+        <section>
+          <label htmlFor="">Align Icons:</label>
+          <div className="fboption__radio__items">
+            <input
+              type="radio"
+              name="align"
+              id="bottom"
+              value="bottom"
+              checked={align === 'bottom'}
+              onChange={(e) => setAlign(e.target.value)}
+            />
+            <label htmlFor="bottom">Bottom</label>
+            <input
+              type="radio"
+              name="align"
+              id="middle"
+              value="middle"
+              checked={align === 'middle'}
+              onChange={(e) => setAlign(e.target.value)}
+            />
+            <label htmlFor="middle">Middle</label>
+            <input
+              type="radio"
+              name="align"
+              id="top"
+              value="top"
+              checked={align === 'top'}
+              onChange={(e) => setAlign(e.target.value)}
+            />
+            <label htmlFor="top">Top</label>
           </div>
         </section>
         {/* Each icon input options */}
@@ -281,7 +332,8 @@ export default function Facebook() {
         </section>
       </aside>
       {/* The preview div */}
-      <div className="fbpreview">
+
+      <div className={`fbpreview ${textColor === 'light' ? 'light' : 'dark'}`}>
         <div className="fbpreview__title">{pollTitle}</div>
         <div className="fbpreview__icons">
           {checkboxItems
@@ -289,7 +341,7 @@ export default function Facebook() {
             .map((icon) => (
               <PreviewIconDiv
                 previewIcon={previewIcon}
-                setPreviewIcon={setPreviewIcon}
+                align={align}
                 icon={icon}
                 key={`preview_${icon}`}
               />

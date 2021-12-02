@@ -16,16 +16,21 @@ function DownloadButton({ title, element }) {
 }
 
 function downloadImage(pollTitle, element) {
-  // Trim the long title to 80 chars to avoid saving bug
-  let title = pollTitle.substring(0, 80)
-  // Replace any dots (.) in title
-  title = title.replace('.', '-')
+  let title
+  if (pollTitle) {
+    // Trim the long title to 80 chars to avoid saving bug
+    title = pollTitle.substring(0, 80)
+    // Replace any dots (.) in title
+    title = title.replace('.', '-')
+  } else {
+    title = `poll-${Date.now()}`
+  }
 
   const nodeElement = document.querySelector(element)
   domtoimage
     .toBlob(nodeElement)
     .then(function (blob) {
-      window.saveAs(blob, `poll-${title}`)
+      window.saveAs(blob, title)
       gtag('event', 'download_poll_image', {
         poll_title: pollTitle,
       })

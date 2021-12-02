@@ -1,7 +1,7 @@
 // Facebook Poll Preview div (right side)
 
 .fbpreview {
-  background: #efefef;
+  background: #fff;
   flex-grow: 4;
   width: 800px;
   max-height: 600px;
@@ -9,7 +9,6 @@
 
   &__title {
     position: absolute;
-    color: $text-color;
     font-size: 3rem;
     font-weight: bold;
     margin-left: auto;
@@ -17,16 +16,15 @@
     left: 0;
     right: 0;
     text-align: center;
-    text-shadow: 2px 2px 2px #000;
+    // text-shadow: 2px 2px 2px #000;
   }
 
   &__watermark {
     position: absolute;
-    color: $text-color;
     font-weight: bold;
     right: 10px;
     bottom: 10px;
-    text-shadow: 2px 2px 2px #000;
+    // text-shadow: 2px 2px 2px #000;
   }
 
   &__icons {
@@ -39,30 +37,36 @@
       background-size: cover;
       background-position: center;
       width: 100%;
+
       display: flex;
-      justify-content: space-around;
+      flex-direction: column;
+      // justify-content: flex-end;
       align-items: center;
-      align-items: flex-end;
-      padding-block-end: 2rem;
 
-      &__like {
-        background-color: #c1deec;
+      & p {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: bold;
       }
 
-      &__love,
-      &__care {
-        background-color: #f8b8c0;
-      }
+      // &__like {
+      //   background-color: #c1deec;
+      // }
 
-      &__angry {
-        background-color: #fa9956;
-      }
+      // &__love,
+      // &__care {
+      //   background-color: #f8b8c0;
+      // }
 
-      &__haha,
-      &__sad,
-      &__wow {
-        background-color: #f8edc7;
-      }
+      // &__angry {
+      //   background-color: #fa9956;
+      // }
+
+      // &__haha,
+      // &__sad,
+      // &__wow {
+      //   background-color: #f8edc7;
+      // }
 
       & img {
         width: 150px;

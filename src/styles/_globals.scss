@@ -1,4 +1,5 @@
 label {
+  cursor: pointer;
   font-size: 1.1rem;
   font-weight: bold;
 }
@@ -16,12 +17,34 @@ input[type='file'] {
   max-width: stretch;
 }
 
-input[type='checkbox'] {
+input[type='checkbox'],
+input[type='radio'] {
   cursor: pointer;
   zoom: 1.3;
   accent-color: var(--theme-color);
 }
 
+.light {
+  color: var(--light-color);
+  text-shadow: 2px 2px 2px #000;
+}
+
+.dark {
+  color: var(--dark-color);
+}
+
+.bottom {
+  justify-content: flex-end;
+  padding-block-end: 2rem;
+}
+
+.middle {
+  justify-content: center;
+}
+
+.top {
+  padding-block-start: 2rem;
+}
 // @media (max-width: 415px) {
 //   input {
 //     padding: 12px;
