@@ -18,6 +18,7 @@ import angryp from '../img/fb/angry.webp'
 import carep from '../img/fb/care.webp'
 
 import { useRef, useState } from 'react'
+import DownloadButton from './DownloadButton'
 const icons = {
   like,
   love,
@@ -86,37 +87,37 @@ export default function Facebook() {
     like: {
       isShowing: true,
       label: 'text',
-      image: 'image url/data',
+      image: undefined,
     },
     love: {
       isShowing: true,
       label: 'text',
-      image: 'image url/data',
+      image: undefined,
     },
     haha: {
       isShowing: true,
       label: 'text',
-      image: 'image url/data',
+      image: undefined,
     },
     sad: {
       isShowing: false,
       label: 'text',
-      image: 'image url/data',
+      image: undefined,
     },
     wow: {
       isShowing: false,
       label: 'text',
-      image: 'image url/data',
+      image: undefined,
     },
     angry: {
       isShowing: false,
       label: 'text',
-      image: 'image url/data',
+      image: undefined,
     },
     care: {
       isShowing: false,
       label: 'text',
-      image: 'image url/data',
+      image: undefined,
     },
   })
 
@@ -143,14 +144,35 @@ export default function Facebook() {
   const OptionItemDiv = ({ icon }) => {
     return (
       <div className="fboption__item">
-        <label htmlFor="">{icon}</label>
+        <label htmlFor={`image_${icon}`}>Image for {icon}</label>
+
+        {previewIcon[icon].image ? (
+          <>
+            <div
+              className="fboption__item__img"
+              style={{ backgroundImage: `url(${previewIcon[icon].image})` }}
+            ></div>
+            <button
+              onClick={() => {
+                const state = { ...previewIcon }
+                state[icon].image = undefined
+                return setPreviewIcon(state)
+              }}
+            >
+              &times; Close
+            </button>
+          </>
+        ) : (
+          <input
+            type="file"
+            name={`image_${icon}`}
+            id={`image_${icon}`}
+            onChange={(e) => uploadImage(e, icon)}
+          />
+        )}
+
+        <label htmlFor="">Label for {icon} (optional)</label>
         <input type="text" />
-        <input
-          type="file"
-          name=""
-          id=""
-          onChange={(e) => uploadImage(e, icon)}
-        />
       </div>
     )
   }
@@ -180,6 +202,7 @@ export default function Facebook() {
             alt={`Icon for ${icon}`}
             width={48}
             height={48}
+            title={`Icon for ${icon}`}
           />
         </label>
       </div>
@@ -224,7 +247,7 @@ export default function Facebook() {
         </section>
         {/* Download Button */}
         <section>
-          <button onClick={downloadImage}>Download</button>
+          <DownloadButton title={pollTitle} element=".fbpreview" />
         </section>
       </aside>
       {/* The preview div */}

@@ -7,6 +7,7 @@ input {
   font-size: 1rem;
   padding: 10px;
   border: 1px solid #ccc;
+  border-radius: 3px;
 }
 
 input[type='text'],
@@ -23,23 +24,11 @@ input[type='checkbox'] {
   accent-color: var(--theme-color);
 }
 
-@media (max-width: 415px) {
-  input {
-    padding: 12px;
-    font-size: 1.2rem;
-  }
-  input[type='text'] {
-    width: 100%;
-  }
-  input[type='checkbox'] {
-    zoom: 2;
-  }
-}
-
 .content {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  gap: 1rem;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
@@ -50,7 +39,6 @@ input[type='checkbox'] {
       -ms-flex-positive: 1;
           flex-grow: 1;
   width: 300px;
-  padding: 1rem;
 }
 
 .fboption__label {
@@ -94,10 +82,20 @@ input[type='checkbox'] {
 }
 
 .fboption__item {
+  display: -ms-grid;
+  display: grid;
+  gap: 10px;
   padding: 1rem;
   margin: 1rem 0;
   background: #efefef;
   border-radius: 5px;
+}
+
+.fboption__item__img {
+  background-size: cover;
+  border: 3px solid #fff;
+  width: 80px;
+  height: 80px;
 }
 
 .fbpreview {

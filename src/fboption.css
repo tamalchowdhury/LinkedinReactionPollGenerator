@@ -3,7 +3,6 @@
       -ms-flex-positive: 1;
           flex-grow: 1;
   width: 300px;
-  padding: 1rem;
 }
 
 .fboption__label {
@@ -35,8 +34,6 @@
   cursor: pointer;
   width: 48px;
   height: 48px;
-  -webkit-filter: drop-shadow(1px 1px 0 black) drop-shadow(-1px -1px 0 black);
-          filter: drop-shadow(1px 1px 0 black) drop-shadow(-1px -1px 0 black);
 }
 
 .fboption__checkbox input[type='checkbox'] {
@@ -49,9 +46,19 @@
 }
 
 .fboption__item {
+  display: -ms-grid;
+  display: grid;
+  gap: 10px;
   padding: 1rem;
   margin: 1rem 0;
   background: #efefef;
   border-radius: 5px;
+}
+
+.fboption__item__img {
+  background-size: cover;
+  border: 3px solid #fff;
+  width: 80px;
+  height: 80px;
 }
 /*# sourceMappingURL=fboption.css.map */
