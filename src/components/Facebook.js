@@ -170,12 +170,14 @@ const PreviewIconDiv = ({ previewIcon, align, icon }) => {
       className={`fbpreview__icons__icon fbpreview__icons__icon__${icon} ${align}`}
       style={{ backgroundImage: `url(${previewIcon[icon].image})` }}
     >
-      <img
-        src={pngs[icon]}
-        alt={`Reaction icon for ${icon}`}
-        width={150}
-        height="auto"
-      />
+      <div className="image-container">
+        <img
+          src={pngs[icon]}
+          alt={`Reaction icon for ${icon}`}
+          width={150}
+          height="auto"
+        />
+      </div>
 
       <p>{previewIcon[icon].label}</p>
     </div>

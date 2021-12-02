@@ -54,6 +54,71 @@ input[type='radio'] {
           padding-block-start: 2rem;
 }
 
+:root {
+  --placeholder-primary: #f8edc7;
+  --placeholder-secondary: #fa9956;
+}
+
+.image-container {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  -webkit-animation: placeholder ease-in-out 2s infinite;
+          animation: placeholder ease-in-out 2s infinite;
+}
+
+@-webkit-keyframes placeholder {
+  0% {
+    background-color: var(--placeholder-primary);
+  }
+  50% {
+    background-color: var(--placeholder-secondary);
+  }
+  100% {
+    background-color: var(--placeholder-primary);
+  }
+}
+
+@keyframes placeholder {
+  0% {
+    background-color: var(--placeholder-primary);
+  }
+  50% {
+    background-color: var(--placeholder-secondary);
+  }
+  100% {
+    background-color: var(--placeholder-primary);
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+
+.item.loaded .image-container {
+  -webkit-animation: none;
+          animation: none;
+}
+
+.item.loaded .image-container img {
+  -webkit-animation: fadeIn linear 0.5s;
+          animation: fadeIn linear 0.5s;
+}
+
 .header .wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
