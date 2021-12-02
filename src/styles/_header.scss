@@ -1,0 +1,16 @@
+.header .wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav a {
+  padding: 10px;
+}
+
+@media (max-width: 415px) {
+  .header .wrapper {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

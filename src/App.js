@@ -27,11 +27,19 @@ function App() {
       <Router>
         <header className="header">
           <div className="wrapper">
-            <h1>
-              <a href="/">ReactionPoll.com</a>
-              <span id="beta">(Beta)</span>
-            </h1>
-            <p className="tagline">Get more engagements with reaction polls</p>
+            <div>
+              <h1>
+                <Link to="/">ReactionPoll.com</Link>
+                <span id="beta">(Beta)</span>
+              </h1>
+              <p className="tagline">
+                Get more engagements with reaction polls
+              </p>
+            </div>
+            <div className="nav">
+              <Link to="/">Linkedin</Link>
+              <Link to="/facebook">Facebook</Link>
+            </div>
           </div>
         </header>
         <div className="container">
