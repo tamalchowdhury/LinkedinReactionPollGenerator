@@ -3,6 +3,7 @@
       -ms-flex-positive: 1;
           flex-grow: 1;
   width: 300px;
+  padding: 1rem;
 }
 
 .fboption__label {
@@ -21,6 +22,7 @@
 }
 
 .fboption__checkbox {
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -32,9 +34,16 @@
 .fboption__checkbox img {
   cursor: pointer;
   width: 48px;
+  height: 48px;
+  -webkit-filter: drop-shadow(1px 1px 0 black) drop-shadow(-1px -1px 0 black);
+          filter: drop-shadow(1px 1px 0 black) drop-shadow(-1px -1px 0 black);
 }
 
 .fboption__checkbox input[type='checkbox'] {
+  position: absolute;
+  left: -3px;
+  top: -3px;
+  z-index: 10;
   zoom: 1.5;
   cursor: pointer;
 }

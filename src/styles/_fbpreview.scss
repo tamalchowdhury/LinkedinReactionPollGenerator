@@ -3,7 +3,8 @@
 .fbpreview {
   background: #efefef;
   flex-grow: 4;
-  // max-width: 800px;
+  width: 800px;
+  max-height: 600px;
   position: relative;
 
   &__title {
@@ -32,7 +33,7 @@
     display: flex;
     justify-content: space-around;
     height: 100%;
-    aspect-ratio: 4/3; // Experimental, so use some fallbacks
+    // aspect-ratio: 4/3; // Experimental, so use some fallbacks
 
     &__icon {
       background-size: cover;

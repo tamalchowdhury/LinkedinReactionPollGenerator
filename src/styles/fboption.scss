@@ -3,6 +3,7 @@
 .fboption {
   flex-grow: 1;
   width: 300px;
+  padding: 1rem;
 
   &__label {
     display: block;
@@ -17,15 +18,22 @@
   }
 
   &__checkbox {
+    position: relative;
     display: flex;
     align-items: center;
 
     & img {
       cursor: pointer;
       width: 48px;
+      height: 48px;
+      filter: drop-shadow(1px 1px 0 black) drop-shadow(-1px -1px 0 black);
     }
 
     & input[type='checkbox'] {
+      position: absolute;
+      left: -3px;
+      top: -3px;
+      z-index: 10;
       zoom: 1.5;
       cursor: pointer;
     }
