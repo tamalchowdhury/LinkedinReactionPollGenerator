@@ -17,7 +17,7 @@ import sadp from '../img/fb/sad.webp'
 import angryp from '../img/fb/angry.webp'
 import carep from '../img/fb/care.webp'
 
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import DownloadButton from './DownloadButton'
 const icons = {
   like,
@@ -77,6 +77,7 @@ function uploadImage(event, previewIcon, setPreviewIcon, icon) {
 }
 
 const OptionItemDiv = ({ previewIcon, setPreviewIcon, icon }) => {
+  const [loaded, setLoaded] = useState(false)
   return (
     <div className="fboption__item">
       <div className="fboption__item__label">
@@ -85,6 +86,7 @@ const OptionItemDiv = ({ previewIcon, setPreviewIcon, icon }) => {
           src={webps[icon]}
           fallback={pngs[icon]}
           alt={`Mini icon for ${icon}`}
+          setLoaded={setLoaded}
           height={20}
           width={20}
         />
@@ -133,6 +135,7 @@ const OptionItemDiv = ({ previewIcon, setPreviewIcon, icon }) => {
 }
 
 const OptionCheckboxIcon = ({ previewIcon, setPreviewIcon, icon }) => {
+  const [loaded, setLoaded] = useState(false)
   return (
     <div
       className={`fboption__checkbox ${
@@ -151,31 +154,37 @@ const OptionCheckboxIcon = ({ previewIcon, setPreviewIcon, icon }) => {
         }}
       />
       <label htmlFor={icon}>
-        <ImgWithFallback
-          src={webps[icon]}
-          fallback={pngs[icon]}
-          alt={`Icon for ${icon}`}
-          width={48}
-          height={48}
-          title={`Icon for ${icon}`}
-        />
+        <div className={`icon box ${loaded ? 'loaded' : 'empty'}`}>
+          <ImgWithFallback
+            src={webps[icon]}
+            fallback={pngs[icon]}
+            alt={`Icon for ${icon}`}
+            width={48}
+            height={48}
+            setLoaded={setLoaded}
+            title={`Icon for ${icon}`}
+          />
+        </div>
       </label>
     </div>
   )
 }
 
 const PreviewIconDiv = ({ previewIcon, align, icon }) => {
+  const [loaded, setLoaded] = useState(false)
+
   return (
     <div
       className={`fbpreview__icons__icon fbpreview__icons__icon__${icon} ${align}`}
       style={{ backgroundImage: `url(${previewIcon[icon].image})` }}
     >
-      <div className="image-container">
+      <div className={`image box ${loaded ? 'loaded' : 'empty'}`}>
         <img
           src={pngs[icon]}
           alt={`Reaction icon for ${icon}`}
           width={150}
           height="auto"
+          onLoad={() => setLoaded(true)}
         />
       </div>
 

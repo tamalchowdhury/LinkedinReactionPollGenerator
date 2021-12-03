@@ -3,11 +3,21 @@
   --placeholder-secondary: #fa9956;
 }
 
-.image-container {
-  width: 150px;
-  height: 150px;
+.box {
   border-radius: 50%;
   animation: placeholder ease-in-out 2s infinite;
+}
+
+.image {
+  width: 150px;
+  height: 150px;
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+  --placeholder-primary: #efefef;
+  --placeholder-secondary: #ddd;
 }
 
 @keyframes placeholder {
@@ -30,9 +40,12 @@
     opacity: 100%;
   }
 }
-.item.loaded .image-container {
+.loaded.image.box,
+.loaded.icon.box {
   animation: none;
 }
-.item.loaded .image-container img {
+.loaded.image.box img,
+.loaded.icon.box img,
+.loaded.icon.box source {
   animation: fadeIn linear 0.5s;
 }

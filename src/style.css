@@ -59,12 +59,22 @@ input[type='radio'] {
   --placeholder-secondary: #fa9956;
 }
 
-.image-container {
-  width: 150px;
-  height: 150px;
+.box {
   border-radius: 50%;
   -webkit-animation: placeholder ease-in-out 2s infinite;
           animation: placeholder ease-in-out 2s infinite;
+}
+
+.image {
+  width: 150px;
+  height: 150px;
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+  --placeholder-primary: #efefef;
+  --placeholder-secondary: #ddd;
 }
 
 @-webkit-keyframes placeholder {
@@ -109,12 +119,15 @@ input[type='radio'] {
   }
 }
 
-.item.loaded .image-container {
+.loaded.image.box,
+.loaded.icon.box {
   -webkit-animation: none;
           animation: none;
 }
 
-.item.loaded .image-container img {
+.loaded.image.box img,
+.loaded.icon.box img,
+.loaded.icon.box source {
   -webkit-animation: fadeIn linear 0.5s;
           animation: fadeIn linear 0.5s;
 }
