@@ -135,13 +135,6 @@ input[type='radio'] {
           animation: none;
 }
 
-.loaded.image.box img,
-.loaded.icon.box img,
-.loaded.icon.box source {
-  -webkit-animation: fadeIn linear 0.5s;
-          animation: fadeIn linear 0.5s;
-}
-
 .header .wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
