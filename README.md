@@ -1,4 +1,4 @@
-# LinkedIn Reaction Poll Generator(Beta)
+# LinkedIn and Facebook Reaction Poll Generator(Beta)
 
 Reactions increase the reach of a post on LinkedIn similar to what happens on every other social media platform. Because of this, something I call "reaction polls" have become really popular as a growth hack. Instead of running a regular LinkedIn poll, which is frankly pretty jank and constrained to 4 options, you can have users react to your post to vote on the option they want, creating a much richer experience that also nets you the poster a bunch of free engagement. If you don't know what I'm talking about, here's an example of one of these reaction polls:
 
@@ -36,33 +36,3 @@ Using `<canvas>` API it's possible to draw text over images like we see meme gen
 I created a preview or demo area where we will put all the text and icons. When we click **download** domtoimage will take that entire element by the class and offer to save. The save function is achieved using another package called [File Saver](https://github.com/eligrey/FileSaver.js/)
 
 The main interactivity is done using ReactJS with local state.
-
-## Todo List
-
-- Add the 6th remaining icon, Support.
-- Add option for image uploads for each votes.
-- Variable text size for legibility.
-- Need to make this app usable on the mobile. Right now it's not very friendly, because it's best fit as a desktop app.
-- Implement accessibility.
-- Browser testing. (works well on all major browsers. IE 11 shows blank page)
-- Need to fix bugs after user testing.
-- A reset button to clear all the text.
-- Refactor the code.
-- Add a button to directly post to linkedin.
-- Title uppercase, lowercase, capital case options.
-- Dark mode.
-- Color options.
-- Save the last image data into the user's browser.
-- Implement image loading skeleton for layout shifts
-- Other extensions mentioned [here](https://github.com/Gear61/Software-Project-Ideas/blob/main/LinkedIn%20Reaction%20Poll%20Generator.md#possible-extensions)
-
-## Done
-
-- Mobile responsive
-- Bought domain name
-- Add google analytics for page views and custom events for image download button clicks.
-- Add github star button.
-- Better layout so we can see the text while editing.
-- Want to implement high-resolution image outputs. At least 800-1200px. (made the image 800px)
-- What happenes when we add a long title and long option names? Currently when we enter a long title, it will not add `.png` at the end of the file when saving the file. So we might wanna trim the file name when saving. (fixed this bug by trimming the title)
-- Add option for grid icon layout.
