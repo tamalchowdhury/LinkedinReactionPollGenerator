@@ -65,7 +65,7 @@ input[type='radio'] {
           animation: placeholder ease-in-out 2s infinite;
 }
 
-.image {
+.image.empty {
   width: 150px;
   height: 150px;
 }
@@ -75,6 +75,16 @@ input[type='radio'] {
   height: 48px;
   --placeholder-primary: #efefef;
   --placeholder-secondary: #ddd;
+}
+
+.image.like {
+  --placeholder-primary: #c1deec;
+  --placeholder-secondary: #245dfe;
+}
+
+.image.love {
+  --placeholder-primary: #f8b8c0;
+  --placeholder-secondary: #f55065;
 }
 
 @-webkit-keyframes placeholder {

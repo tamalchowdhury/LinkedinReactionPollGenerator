@@ -1,6 +1,7 @@
 import domtoimage from 'dom-to-image'
 import { saveAs } from 'file-saver'
 import ImgWithFallback from './ImgWithFallback'
+import { HelmetProvider, Helmet } from 'react-helmet-async'
 
 import like from '../img/fb/like.png'
 import love from '../img/fb/love.png'
@@ -64,8 +65,6 @@ function getBase64(file) {
     reader.onerror = (error) => reject(error)
   })
 }
-
-const reactions = ['like', 'love', 'care']
 
 // Take file from the computer and store it into the state
 function uploadImage(event, previewIcon, setPreviewIcon, icon) {
@@ -178,12 +177,10 @@ const PreviewIconDiv = ({ previewIcon, align, icon }) => {
       className={`fbpreview__icons__icon fbpreview__icons__icon__${icon} ${align}`}
       style={{ backgroundImage: `url(${previewIcon[icon].image})` }}
     >
-      <div className={`image box ${loaded ? 'loaded' : 'empty'}`}>
+      <div className={`image box ${loaded ? 'loaded' : 'empty'} ${icon}`}>
         <img
           src={pngs[icon]}
           alt={`Reaction icon for ${icon}`}
-          width={150}
-          height="auto"
           onLoad={() => setLoaded(true)}
         />
       </div>
@@ -200,12 +197,12 @@ export default function Facebook() {
   const [previewIcon, setPreviewIcon] = useState({
     like: {
       isShowing: true,
-      label: 'Superman',
+      label: undefined,
       image: undefined,
     },
     love: {
       isShowing: true,
-      label: 'Batman',
+      label: undefined,
       image: undefined,
     },
     haha: {
@@ -229,137 +226,145 @@ export default function Facebook() {
       image: undefined,
     },
     care: {
-      isShowing: false,
+      isShowing: true,
       label: undefined,
       image: undefined,
     },
   })
 
   return (
-    <div className="content">
-      {/* The Options Div */}
-      <aside className="fboption">
-        {/* Poll Title */}
-        <section>
-          <label className="fboption__label" htmlFor="poll-title">
-            Poll Title:
-          </label>
-          <input
-            type="text"
-            value={pollTitle}
-            name="poll-title"
-            id="poll-title"
-            onChange={(e) => setPollTitle(e.target.value)}
-          />
-        </section>
-        {/* Icon Checkboxes */}
-        <section>
-          <label htmlFor="" className="fboption__label">
-            Icons:
-          </label>
-          <div className="fboption__checkboxes">
-            {checkboxItems.map((icon) => (
-              <OptionCheckboxIcon
-                previewIcon={previewIcon}
-                setPreviewIcon={setPreviewIcon}
-                icon={icon}
-                key={`option_${icon}`}
+    <>
+      <Helmet>
+        <title>Facebook Reaction Poll Generator | ReactionPoll.com</title>
+        <link rel="canonical" href="https://reactionpoll.com/facebook" />
+      </Helmet>
+      <div className="content">
+        {/* The Options Div */}
+        <aside className="fboption">
+          {/* Poll Title */}
+          <section>
+            <label className="fboption__label" htmlFor="poll-title">
+              Poll Title:
+            </label>
+            <input
+              type="text"
+              value={pollTitle}
+              name="poll-title"
+              id="poll-title"
+              onChange={(e) => setPollTitle(e.target.value)}
+            />
+          </section>
+          {/* Icon Checkboxes */}
+          <section>
+            <label htmlFor="" className="fboption__label">
+              Icons:
+            </label>
+            <div className="fboption__checkboxes">
+              {checkboxItems.map((icon) => (
+                <OptionCheckboxIcon
+                  previewIcon={previewIcon}
+                  setPreviewIcon={setPreviewIcon}
+                  icon={icon}
+                  key={`option_${icon}`}
+                />
+              ))}
+            </div>
+          </section>
+          <section>
+            <label htmlFor="">Text Color:</label>
+            <div className="fboption__radio__items">
+              <input
+                type="radio"
+                name="text_color"
+                id="dark"
+                value="dark"
+                checked={textColor === 'dark'}
+                onChange={(e) => setTextColor(e.target.value)}
               />
-            ))}
-          </div>
-        </section>
-        <section>
-          <label htmlFor="">Text Color:</label>
-          <div className="fboption__radio__items">
-            <input
-              type="radio"
-              name="text_color"
-              id="dark"
-              value="dark"
-              checked={textColor === 'dark'}
-              onChange={(e) => setTextColor(e.target.value)}
-            />
-            <label htmlFor="dark">Dark</label>
-            <input
-              type="radio"
-              name="text_color"
-              id="light"
-              value="light"
-              checked={textColor === 'light'}
-              onChange={(e) => setTextColor(e.target.value)}
-            />
-            <label htmlFor="light">Light</label>
-          </div>
-        </section>
-        <section>
-          <label htmlFor="">Align Icons:</label>
-          <div className="fboption__radio__items">
-            <input
-              type="radio"
-              name="align"
-              id="bottom"
-              value="bottom"
-              checked={align === 'bottom'}
-              onChange={(e) => setAlign(e.target.value)}
-            />
-            <label htmlFor="bottom">Bottom</label>
-            <input
-              type="radio"
-              name="align"
-              id="middle"
-              value="middle"
-              checked={align === 'middle'}
-              onChange={(e) => setAlign(e.target.value)}
-            />
-            <label htmlFor="middle">Middle</label>
-            <input
-              type="radio"
-              name="align"
-              id="top"
-              value="top"
-              checked={align === 'top'}
-              onChange={(e) => setAlign(e.target.value)}
-            />
-            <label htmlFor="top">Top</label>
-          </div>
-        </section>
-        {/* Each icon input options */}
-        <section>
-          <h3>Enter Poll Option Details</h3>
-          {checkboxItems
-            .filter((item) => previewIcon[item].isShowing)
-            .map((icon) => (
-              <OptionItemDiv
-                previewIcon={previewIcon}
-                setPreviewIcon={setPreviewIcon}
-                icon={icon}
-                key={`checkbox_${icon}`}
+              <label htmlFor="dark">Dark</label>
+              <input
+                type="radio"
+                name="text_color"
+                id="light"
+                value="light"
+                checked={textColor === 'light'}
+                onChange={(e) => setTextColor(e.target.value)}
               />
-            ))}
-        </section>
-        {/* Download Button */}
-        <section>
-          <DownloadButton title={pollTitle} element=".fbpreview" />
-        </section>
-      </aside>
-      {/* The preview div */}
+              <label htmlFor="light">Light</label>
+            </div>
+          </section>
+          <section>
+            <label htmlFor="">Align Icons:</label>
+            <div className="fboption__radio__items">
+              <input
+                type="radio"
+                name="align"
+                id="bottom"
+                value="bottom"
+                checked={align === 'bottom'}
+                onChange={(e) => setAlign(e.target.value)}
+              />
+              <label htmlFor="bottom">Bottom</label>
+              <input
+                type="radio"
+                name="align"
+                id="middle"
+                value="middle"
+                checked={align === 'middle'}
+                onChange={(e) => setAlign(e.target.value)}
+              />
+              <label htmlFor="middle">Middle</label>
+              <input
+                type="radio"
+                name="align"
+                id="top"
+                value="top"
+                checked={align === 'top'}
+                onChange={(e) => setAlign(e.target.value)}
+              />
+              <label htmlFor="top">Top</label>
+            </div>
+          </section>
+          {/* Each icon input options */}
+          <section>
+            <h3>Enter Poll Option Details</h3>
+            {checkboxItems
+              .filter((item) => previewIcon[item].isShowing)
+              .map((icon) => (
+                <OptionItemDiv
+                  previewIcon={previewIcon}
+                  setPreviewIcon={setPreviewIcon}
+                  icon={icon}
+                  key={`checkbox_${icon}`}
+                />
+              ))}
+          </section>
+          {/* Download Button */}
+          <section>
+            <DownloadButton title={pollTitle} element=".fbpreview" />
+          </section>
+        </aside>
+        {/* The preview div */}
 
-      <div className={`fbpreview ${textColor === 'light' ? 'light' : 'dark'}`}>
-        <div className="fbpreview__title">{pollTitle}</div>
-        <div className="fbpreview__icons">
-          {checkboxItems
-            .filter((item) => previewIcon[item].isShowing)
-            .map((icon) => (
-              <PreviewIconDiv
-                previewIcon={previewIcon}
-                align={align}
-                icon={icon}
-                key={`preview_${icon}`}
-              />
-            ))}
+        <div
+          className={`fbpreview ${textColor === 'light' ? 'light' : 'dark'}`}
+        >
+          <div className="fbpreview__title">{pollTitle}</div>
+          <div className="fbpreview__icons">
+            {checkboxItems
+              .filter((item) => previewIcon[item].isShowing)
+              .map((icon) => (
+                <PreviewIconDiv
+                  previewIcon={previewIcon}
+                  align={align}
+                  icon={icon}
+                  key={`preview_${icon}`}
+                />
+              ))}
+          </div>
+          <div className="fbpreview__watermark">ReactionPoll.com</div>
         </div>
-        <div className="fbpreview__watermark">ReactionPoll.com</div>
       </div>
-    </div>
+    </>
   )
 }
