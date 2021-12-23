@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react'
+import React, { ChangeEvent, ChangeEventHandler } from 'react'
 import getBase64 from './getBase64'
 
 // Take file from the computer and store it into the state

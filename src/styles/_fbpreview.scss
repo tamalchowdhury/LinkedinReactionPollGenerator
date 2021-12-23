@@ -71,6 +71,8 @@
       & img {
         width: 150px;
         height: autopx;
+        filter: drop-shadow(5px 0 0 white) drop-shadow(0 5px 0 white)
+          drop-shadow(-5px 0 0 white) drop-shadow(0 -5px 0 white);
       }
     }
   }

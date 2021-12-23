@@ -7,30 +7,10 @@ import { Helmet } from 'react-helmet-async'
 
 const checkboxItems = ['like', 'love', 'haha', 'wow', 'sad', 'angry', 'care']
 
-type IconType = {
-  isShowing: boolean
-  label: string
-  image: string
-}
-
-type PreviewIcon = {}
-
-type OptionItemPropType = {
-  previewIcon: PreviewIcon
-  setPreviewIcon: () => void
-  icon: string
-}
-
 export default function Facebook() {
   const [pollTitle, setPollTitle] = useState('Who is your favorite?')
   const [textColor, setTextColor] = useState('dark')
   const [align, setAlign] = useState('middle') // bottom, middle, and top
-
-  type iconState = {
-    isShowing: boolean
-    label: string
-    image: string
-  }
 
   const [previewIcon, setPreviewIcon] = useState({
     like: {

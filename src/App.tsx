@@ -45,17 +45,17 @@ function App() {
                 </p>
               </div>
               <div className="nav">
-                <Link to="/">Linkedin</Link>
-                <Link to="/linkedin-new">Linkedin (New)</Link>
+                <Link to="/linkedin">Linkedin</Link>
                 <Link to="/facebook">Facebook</Link>
+                <Link to="/linkedin-old">Linkedin (legacy)</Link>
               </div>
             </div>
           </header>
           <div className="container">
             <Routes>
-              <Route path="/" element={<LinkedinOld />} />
-              <Route path="/linkedin" element={<LinkedinOld />} />
-              <Route path="/linkedin-new" element={<Linkedin />} />
+              <Route path="/" element={<Linkedin />} />
+              <Route path="/linkedin-old" element={<LinkedinOld />} />
+              <Route path="/linkedin" element={<Linkedin />} />
               <Route path="/facebook" element={<Facebook />} />
             </Routes>
 

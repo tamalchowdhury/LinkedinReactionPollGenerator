@@ -1,6 +1,7 @@
 import ImgWithFallback from './ImgWithFallback'
 import { pngs, webps } from './images'
 import { useState } from 'react'
+import uploadImage from '../helpers/uploadImage'
 
 const OptionItemDiv = ({
   previewIcon,
