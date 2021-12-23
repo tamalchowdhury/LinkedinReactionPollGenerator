@@ -12,14 +12,16 @@ limitations under the License.
 */
 
 import './App.css'
+import './styles/style.scss'
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
 import domtoimage from 'dom-to-image'
 import { saveAs } from 'file-saver'
 import GitHubButton from 'react-github-btn'
 
 import { useEffect, useState } from 'react'
-import Facebook from './components/Facebook'
-import Linkedin from './components/Linkedin'
+import Facebook from './components/pages/Facebook'
+import Linkedin from './components/pages/Linkedin'
+import LinkedinOld from './components/pages/legacy/LinkedinOld'
 import { HelmetProvider, Helmet } from 'react-helmet-async'
 
 function App() {
@@ -44,13 +46,16 @@ function App() {
               </div>
               <div className="nav">
                 <Link to="/">Linkedin</Link>
+                <Link to="/linkedin-new">Linkedin (New)</Link>
                 <Link to="/facebook">Facebook</Link>
               </div>
             </div>
           </header>
           <div className="container">
             <Routes>
-              <Route path="/" element={<Linkedin />} />
+              <Route path="/" element={<LinkedinOld />} />
+              <Route path="/linkedin" element={<LinkedinOld />} />
+              <Route path="/linkedin-new" element={<Linkedin />} />
               <Route path="/facebook" element={<Facebook />} />
             </Routes>
 
