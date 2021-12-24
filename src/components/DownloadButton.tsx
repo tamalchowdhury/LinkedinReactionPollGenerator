@@ -2,7 +2,12 @@ import domtoimage from 'dom-to-image'
 import { saveAs } from 'file-saver'
 import gtag from 'ga-gtag'
 
-function DownloadButton({ title, element }) {
+type DownloadButtonProp = {
+  title: string
+  element: string
+}
+
+function DownloadButton({ title, element }: DownloadButtonProp) {
   return (
     <button
       id="download"
@@ -15,8 +20,8 @@ function DownloadButton({ title, element }) {
   )
 }
 
-function downloadImage(pollTitle, element) {
-  let title
+function downloadImage(pollTitle: string, element: string) {
+  let title: string
   if (pollTitle) {
     // Trim the long title to 80 chars to avoid saving bug
     title = pollTitle.substring(0, 80)
@@ -26,7 +31,10 @@ function downloadImage(pollTitle, element) {
     title = `poll-${Date.now()}`
   }
 
-  const nodeElement = document.querySelector(element)
+  const nodeElement: HTMLElement = document.querySelector(
+    element
+  ) as HTMLHeadingElement
+
   domtoimage
     .toBlob(nodeElement)
     .then(function (blob) {

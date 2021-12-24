@@ -16,6 +16,14 @@
   height: 150px;
 }
 
+.card__image.empty {
+  width: 400px;
+  height: 285px;
+  --placeholder-primary: #efefef;
+  --placeholder-secondary: #ddd;
+  animation: placeholder ease-in-out 2s infinite;
+}
+
 .icon {
   width: 48px;
   height: 48px;

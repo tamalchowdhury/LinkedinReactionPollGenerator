@@ -12,15 +12,18 @@ limitations under the License.
 */
 
 import './App.css'
+import './styles/style.scss'
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
-import domtoimage from 'dom-to-image'
-import { saveAs } from 'file-saver'
-import GitHubButton from 'react-github-btn'
 
-import { useEffect, useState } from 'react'
-import Facebook from './components/Facebook'
-import Linkedin from './components/Linkedin'
+// Pages
+import Facebook from './components/pages/Facebook'
+import Linkedin from './components/pages/Linkedin'
+import LinkedinOld from './components/pages/legacy/LinkedinOld'
+
+// Utilities
 import { HelmetProvider, Helmet } from 'react-helmet-async'
+import GitHubButton from 'react-github-btn'
+import Home from './components/pages/Home/Home'
 
 function App() {
   return (
@@ -43,25 +46,24 @@ function App() {
                 </p>
               </div>
               <div className="nav">
-                <Link to="/">Linkedin</Link>
+                <Link to="/linkedin">Linkedin</Link>
                 <Link to="/facebook">Facebook</Link>
+                <Link to="/linkedin-old">Linkedin (old)</Link>
               </div>
             </div>
           </header>
           <div className="container">
             <Routes>
-              <Route path="/" element={<Linkedin />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/linkedin-old" element={<LinkedinOld />} />
+              <Route path="/linkedin" element={<Linkedin />} />
               <Route path="/facebook" element={<Facebook />} />
             </Routes>
 
             <footer className="footer text_center">
               <p>
                 &copy; 2021 Put Together by{' '}
-                <a
-                  href="https://www.linkedin.com/in/tamalweb/"
-                  rel="noreferrer"
-                  target="_blank"
-                >
+                <a href="https://tamalweb.com" target="_blank" rel="author">
                   Tamal Web
                 </a>
               </p>

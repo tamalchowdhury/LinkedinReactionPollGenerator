@@ -3,17 +3,17 @@ import domtoimage from 'dom-to-image'
 import { saveAs } from 'file-saver'
 import gtag from 'ga-gtag'
 
-import like from '../img/like.png'
-import celebrate from '../img/celebrate.png'
-import love from '../img/love.png'
-import insightful from '../img/insightful.png'
-import curious from '../img/curious.png'
+import like from '../../../img/like.png'
+import celebrate from '../../../img/celebrate.png'
+import love from '../../../img/love.png'
+import insightful from '../../../img/insightful.png'
+import curious from '../../../img/curious.png'
 
-import one_row from '../img/one_row.png'
-import two_col from '../img/two_col.png'
-import three_col from '../img/three_col.png'
+import one_row from '../../../img/one_row.png'
+import two_col from '../../../img/two_col.png'
+import three_col from '../../../img/three_col.png'
 
-export default function Linkedin() {
+export default function LinkedinOld() {
   const [pollTitle, setPollTitle] = useState('Who is your favorite CEO?')
   const [layoutOption, setLayoutOption] = useState('one_row')
   const [showLike, setShowLike] = useState({
