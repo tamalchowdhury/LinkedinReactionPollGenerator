@@ -48,7 +48,7 @@ function App() {
               <div className="nav">
                 <Link to="/linkedin">Linkedin</Link>
                 <Link to="/facebook">Facebook</Link>
-                <Link to="/linkedin-old">Linkedin (legacy)</Link>
+                <Link to="/linkedin-old">Linkedin (old)</Link>
               </div>
             </div>
           </header>
