@@ -1,0 +1,14 @@
+.card__section {
+  display: flex;
+  justify-content: space-around;
+  .card {
+    &__title {
+      font-size: 1.6rem;
+      font-weight: bold;
+    }
+
+    &__description {
+      margin-block-end: 0.5rem;
+    }
+  }
+}

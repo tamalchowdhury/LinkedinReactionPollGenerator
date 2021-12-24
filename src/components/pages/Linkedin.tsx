@@ -31,7 +31,7 @@ export default function Facebook() {
       image: undefined,
     },
     celebrate: {
-      isShowing: false,
+      isShowing: true,
       label: undefined,
       image: undefined,
     },
@@ -55,8 +55,8 @@ export default function Facebook() {
   return (
     <>
       <Helmet>
-        <title>Facebook Reaction Poll Generator | ReactionPoll.com</title>
-        <link rel="canonical" href="https://reactionpoll.com/facebook" />
+        <title>Linkedin Reaction Poll Generator | ReactionPoll.com</title>
+        <link rel="canonical" href="https://reactionpoll.com/linkedin" />
       </Helmet>
       <div className="content">
         {/* The Options Div */}
